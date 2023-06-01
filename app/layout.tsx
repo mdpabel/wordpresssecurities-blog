@@ -16,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={playfair.className}>
+      <body
+        suppressHydrationWarning={true}
+        className={playfair.className}>
         <main className=''>
           <Header />
           {children}
