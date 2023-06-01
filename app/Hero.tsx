@@ -7,8 +7,8 @@ const Hero = () => {
         Unmasking Threats
       </h1>
       <h2 className='mx-auto text-base font-medium text-center md:text-lg'>
-        Hackers don't take vacations. Keep your WordPress site secure and give
-        them no chance to exploit vulnerabilities.
+        Hackers don&apos;t take vacations. Keep your WordPress site secure and
+        give them no chance to exploit vulnerabilities.
       </h2>
     </section>
   );
