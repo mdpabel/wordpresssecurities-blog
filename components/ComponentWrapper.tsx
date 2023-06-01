@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react'
 
-const ComponentWrapper = ({ children }: { children: ReactNode }) => {
+const ComponentWrapper = ({ children, className = "" }: { children: ReactNode, className?: string }) => {
     return (
-        <div className='container md:w-[80%] mx-auto px-4 md:px-0'>{children}</div>
+        <div className={`container md:w-[90%] mx-auto px-4 md:px-0 ` + className}>{children}</div>
     )
 }
 
