@@ -1,6 +1,7 @@
 import { BigCard, SmallCard } from '@/components/Card';
 import ComponentWrapper from '@/components/ComponentWrapper';
 import React from 'react';
+import Newsletter from './Newsletter';
 
 const FeaturedPosts = () => {
   return (
@@ -14,7 +15,7 @@ const FeaturedPosts = () => {
           <SmallCard className='md:h-[140px]' />
         </div>
 
-        <div>HELLO</div>
+        <Newsletter />
       </ComponentWrapper>
     </div>
   );
