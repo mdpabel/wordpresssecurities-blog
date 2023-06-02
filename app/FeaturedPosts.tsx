@@ -6,7 +6,7 @@ import Newsletter from './Newsletter';
 const FeaturedPosts = () => {
   return (
     <div className='h-[450px]'>
-      <ComponentWrapper className='grid grid-cols-1 grid-rows-1 gap-10 md:grid-cols-3'>
+      <ComponentWrapper className='grid grid-cols-1 grid-rows-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'>
         <BigCard className='w-full h-[450px] ' />
 
         <div className='md:h-[450px] grid grid-rows-3 gap-4'>

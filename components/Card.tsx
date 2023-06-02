@@ -7,15 +7,13 @@ export const BigCard = ({ className = '' }: { className?: string }) => {
       <div
         className={`flex flex-col w-full h-full bg-white p-8 rounded-md shadow `}
       >
-        <div className='md:h-1/2'>
-          <img
-            width='40'
-            height='40'
-            className='w-full'
-            src='https://www.elegantthemes.com/blog/wp-content/uploads/2021/12/wordpress-hacked-featured-image-1.jpg'
-            alt=''
-          />
-        </div>
+        <img
+          width='400'
+          height='400'
+          className='w-full max-h-[50%]'
+          src='https://www.elegantthemes.com/blog/wp-content/uploads/2021/12/wordpress-hacked-featured-image-1.jpg'
+          alt=''
+        />
         <div className='space-y-4 h-1/2'>
           <div className='space-y-1'>
             <span className='font-medium text-gray-700'>11 December 2022</span>

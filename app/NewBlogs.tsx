@@ -1,15 +1,19 @@
 import { BigCard, SmallCard } from '@/components/Card';
 import ComponentWrapper from '@/components/ComponentWrapper';
+import { Title } from '@/components/Title';
+
 import React from 'react';
 
 const NewBlogs = () => {
   return (
     <ComponentWrapper>
-      <h2>New on blogs</h2>
-      <div className='grid grid-cols-3'>
+      <div className='py-10'>
+        <Title>New on blogs</Title>
+      </div>
+      <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
         <BigCard />
         <BigCard />
-        <div>
+        <div className='space-y-4'>
           <SmallCard />
           <SmallCard />
           <SmallCard />
