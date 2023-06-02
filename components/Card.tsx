@@ -7,7 +7,7 @@ export const BigCard = ({ className = '' }: { className?: string }) => {
       <div
         className={`flex flex-col w-full h-full bg-white p-8 rounded-md shadow `}
       >
-        <div className='h-1/2'>
+        <div className='md:h-1/2'>
           <img
             width='40'
             height='40'
@@ -48,7 +48,9 @@ export const BigCard = ({ className = '' }: { className?: string }) => {
 
 export const SmallCard = ({ className = '' }: { className?: string }) => {
   return (
-    <div className={`flex px-2 py-4 bg-white ` + className}>
+    <div
+      className={`flex px-3 md:px-2 py-4 bg-white rounded shadow ` + className}
+    >
       <img
         width='60'
         height='60'
@@ -65,7 +67,7 @@ export const SmallCard = ({ className = '' }: { className?: string }) => {
             Lorem ipsum, dolor sit amet consectetur adipisicing.
           </h2>
         </div>
-        <div className='flex space-x-4'>
+        <div className='flex space-x-2 md:space-x-4'>
           <img
             width='30'
             height='30'
