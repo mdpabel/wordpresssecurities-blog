@@ -6,9 +6,9 @@ import {
   FacebookIcon,
   LinkedinIcon,
   TwitterIcon,
-} from './icons';
+} from '@/components/icons';
 import Link from 'next/link';
-import ComponentWrapper from './ComponentWrapper';
+import ComponentWrapper from '@/components/ComponentWrapper';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ const Navbar = () => {
           <Link href='/' className='text-xl font-bold md:text-2xl'>
             WPSecurities.
           </Link>
-          <ul className='items-center hidden space-x-8 md:flex'>
+          <ul className='items-center hidden space-x-8 lg:flex'>
             <li>
               <Link className='text-lg font-medium' href='/'>
                 Home
@@ -33,17 +33,22 @@ const Navbar = () => {
             </li>
             <li>
               <Link className='text-lg font-medium' href='/'>
-                Home
+                Blog
               </Link>
             </li>
             <li>
               <Link className='text-lg font-medium' href='/'>
-                Home
+                Hosting Reviews
               </Link>
             </li>
             <li>
               <Link className='text-lg font-medium' href='/'>
-                Home
+                Vulnerabilities
+              </Link>
+            </li>
+            <li>
+              <Link className='text-lg font-medium' href='/'>
+                Coupons
               </Link>
             </li>
           </ul>
@@ -67,7 +72,7 @@ const Navbar = () => {
           </ul>
 
           <button
-            className='block md:hidden'
+            className='block lg:hidden'
             onClick={() => setOpen(!open)}
             type='button'
           >
@@ -84,7 +89,7 @@ const Navbar = () => {
           }}
           className='block w-full md:hidden'
         >
-          <ul className='absolute right-0 z-50 flex flex-col w-full px-4 mt-4 bg-gray-100 rounded-lg md:hidden top-10'>
+          <ul className='md:w-[90%] mx-auto  lg:px-0 absolute right-0 z-50 flex flex-col w-full px-4 mt-4 bg-gray-100 rounded-lg lg:hidden top-10'>
             <li onClick={() => setOpen(false)} className='border-b'>
               <Link
                 href='/about'
@@ -99,16 +104,31 @@ const Navbar = () => {
                 href='/contact'
                 className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
               >
-                Home
+                Blog
               </Link>
             </li>
             <li onClick={() => setOpen(false)} className='border-b'>
               <Link
+                href='/contact'
                 className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
-                href='https://drive.google.com/file/d/1A6I4qF3WBwlKskaAT23G5volEAJ-9i4T/view?usp=share_link'
-                target='_blank'
               >
-                Home
+                Hosting Reviews
+              </Link>
+            </li>
+            <li onClick={() => setOpen(false)} className='border-b'>
+              <Link
+                href='/contact'
+                className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
+              >
+                Vulnerabilities
+              </Link>
+            </li>
+            <li onClick={() => setOpen(false)} className='border-b'>
+              <Link
+                href='/contact'
+                className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
+              >
+                Coupons
               </Link>
             </li>
           </ul>

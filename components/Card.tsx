@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 export const BigCard = ({ className = '' }: { className?: string }) => {
   return (
@@ -79,6 +80,34 @@ export const SmallCard = ({ className = '' }: { className?: string }) => {
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+export const HostingCard = () => {
+  return (
+    <div className='flex flex-col h-56 p-5 space-y-6 bg-white rounded shadow'>
+      <div className='flex items-center space-x-4 h-1/2'>
+        <img
+          width={100}
+          height={100}
+          src='https://www.wpbeginner.com/wp-content/uploads/2014/01/sitegroudcoupon.png'
+          alt=''
+        />
+        <h2 className='text-xl font-semibold'>Siteground</h2>
+      </div>
+      <p className='h-1/2'>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi
+        laudantium{' '}
+        <Link
+          style={{
+            color: '#FF6200',
+          }}
+          href='/'
+        >
+          Learn more...
+        </Link>
+      </p>
     </div>
   );
 };
