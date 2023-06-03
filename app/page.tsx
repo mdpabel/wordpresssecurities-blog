@@ -3,6 +3,7 @@ import Hero from './Hero';
 import FeaturedPosts from './FeaturedPosts';
 import NewBlogs from './NewBlogs';
 import FeaturedCoupons from './FeaturedCoupons';
+import TopSecurityPlugins from './TopSecurityPlugins';
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
       <FeaturedPosts />
       <NewBlogs />
       <FeaturedCoupons />
-      <div className='pt-[300px]'></div>
+      <TopSecurityPlugins />
     </main>
   );
 }

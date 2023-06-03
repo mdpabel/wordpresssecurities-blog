@@ -1,6 +1,7 @@
 import Header from '@/app/Header';
 import './globals.css';
 import { Playfair_Display } from 'next/font/google';
+import Footer from './Footer';
 
 const playfair = Playfair_Display({ subsets: ['latin'] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
         <main className=''>
           <Header />
           {children}
+          <Footer />
         </main>
       </body>
     </html>

@@ -28,11 +28,6 @@ const Navbar = () => {
           <ul className='items-center hidden space-x-8 lg:flex'>
             <li>
               <Link className='text-lg font-medium' href='/'>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link className='text-lg font-medium' href='/'>
                 Blog
               </Link>
             </li>
@@ -49,6 +44,11 @@ const Navbar = () => {
             <li>
               <Link className='text-lg font-medium' href='/'>
                 Coupons
+              </Link>
+            </li>
+            <li>
+              <Link className='text-lg font-medium' href='/'>
+                Security Providers
               </Link>
             </li>
           </ul>
@@ -92,15 +92,6 @@ const Navbar = () => {
           <ul className='md:w-[90%] mx-auto  lg:px-0 absolute right-0 z-50 flex flex-col w-full px-4 mt-4 bg-gray-100 rounded-lg lg:hidden top-10'>
             <li onClick={() => setOpen(false)} className='border-b'>
               <Link
-                href='/about'
-                className='block py-2 pl-3 pr-4 text-gray-700 rounded '
-                aria-current='page'
-              >
-                Home
-              </Link>
-            </li>
-            <li onClick={() => setOpen(false)} className='border-b'>
-              <Link
                 href='/contact'
                 className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
               >
@@ -129,6 +120,14 @@ const Navbar = () => {
                 className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
               >
                 Coupons
+              </Link>
+            </li>
+            <li onClick={() => setOpen(false)} className='border-b'>
+              <Link
+                href='/contact'
+                className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
+              >
+                Security Providers
               </Link>
             </li>
           </ul>
