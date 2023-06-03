@@ -5,10 +5,10 @@ import NewBlogs from './NewBlogs';
 
 export default function Home() {
   return (
-    <main className=''>
+    <main className='flex flex-col'>
       <Hero />
       <FeaturedPosts />
-      {/* <NewBlogs /> */}
+      <NewBlogs />
       <div className='pt-[300px]'></div>
     </main>
   );
