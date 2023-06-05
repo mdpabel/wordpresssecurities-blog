@@ -1,4 +1,5 @@
 import ComponentWrapper from '@/components/ComponentWrapper';
+import Link from 'next/link';
 import React from 'react';
 
 const TopBar = () => {
@@ -11,7 +12,9 @@ const TopBar = () => {
             <ul className='flex justify-between space-x-6'>
               <li>Contact</li>
               <li>Privacy Policy</li>
-              <li>Login</li>
+              <li>
+                <Link href='/login'>Login</Link>
+              </li>
             </ul>
           </nav>
         </div>

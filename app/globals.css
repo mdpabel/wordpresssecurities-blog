@@ -10,3 +10,30 @@ body {
   background-color: black;
   color: white;
 }
+
+.ProseMirror-focused {
+  outline: 0;
+}
+
+.is-active-editor-btn {
+  background-color: rgb(51, 50, 50);
+  color: white;
+  padding: 0 10px 0 10px;
+}
+
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: gray;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror p.is-empty::before {
+  color: gray;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}

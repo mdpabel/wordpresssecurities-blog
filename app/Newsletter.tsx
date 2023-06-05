@@ -1,6 +1,38 @@
 'use client';
 import { EmailIcon } from '@/components/icons';
-import React, { FormEvent } from 'react';
+import React, { FormEvent, ReactElement, ReactNode } from 'react';
+import { JsxElement } from 'typescript';
+
+// const Input = ({
+//   placeholder,
+//   type,
+//   Icon,
+// }: {
+//   placeholder?: string;
+//   type: string;
+//   Icon: any;
+// }) => {
+//   return Icon ? (
+//     <div className='relative'>
+//       <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+//         <Icon />
+//       </div>
+//       <input
+//         type='text'
+//         id='email-address-icon'
+//         className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 '
+//         placeholder='contact@wordpresssecurities.com'
+//       />
+//     </div>
+//   ) : (
+//     <input
+//       type='email'
+//       id='email-address-icon'
+//       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 '
+//       placeholder='contact@wordpresssecurities.com'
+//     />
+//   );
+// };
 
 const Newsletter = () => {
   const handleNewsletterSubmission = (e: FormEvent) => {
