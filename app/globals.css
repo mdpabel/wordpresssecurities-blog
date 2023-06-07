@@ -18,9 +18,8 @@ body {
 .is-active-editor-btn {
   background-color: rgb(51, 50, 50);
   color: white;
-  padding: 0 10px 0 10px;
+  padding: 10px;
 }
-
 
 .ProseMirror p.is-editor-empty:first-child::before {
   color: gray;
@@ -36,4 +35,15 @@ body {
   float: left;
   height: 0;
   pointer-events: none;
+}
+
+body
+  > main
+  > div
+  > div.jodit-react-container
+  > div
+  > div.jodit-status-bar.jodit-status-bar_resize-handle_true
+  > div:nth-child(4)
+  > a {
+  display: none;
 }
