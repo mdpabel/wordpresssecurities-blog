@@ -51,6 +51,11 @@ const Navbar = () => {
                 Security Providers
               </Link>
             </li>
+            <li>
+              <Link className='text-lg font-medium' href='/dashboard'>
+                Dashboard
+              </Link>
+            </li>
           </ul>
 
           <ul className='hidden space-x-4 md:flex'>
@@ -128,6 +133,14 @@ const Navbar = () => {
                 className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
               >
                 Security Providers
+              </Link>
+            </li>
+            <li onClick={() => setOpen(false)} className='border-b'>
+              <Link
+                href='/dashboard'
+                className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
+              >
+                Dashboard
               </Link>
             </li>
           </ul>
