@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
 import cloudinary from 'cloudinary';
 import streamifier from 'streamifier';
 
@@ -36,50 +35,47 @@ export const GET = async (req: NextRequest) => {
   });
 };
 
-export const POST = async (req: NextRequest) => {
-  console.log(req);
-
-  // const res = await uploadFromBuffer(req);
-
-  return NextResponse.json(
-    {
-      success: true,
-      message: 'Image uploaded successfully.',
-      data: {
-        url: 'https://res.cloudinary.com/divg4kqqk/image/upload/v1686392050/foo/gvjfn3i3cqp3paobudzo.jpg',
-        thumbnailUrl:
-          'https://res.cloudinary.com/divg4kqqk/image/upload/v1686392050/foo/gvjfn3i3cqp3paobudzo.jpg',
-        filename: 'image.jpg',
-        size: '1024 KB',
-      },
-    },
-    {
-      status: 200,
-    }
-  );
+type CloudinaryUploadResponse = {
+  secure_url?: string;
+  success?: boolean;
+  message?: string;
 };
 
-let uploadFromBuffer = async (req: NextRequest) => {
+export const POST = async (req: NextRequest) => {
+  const { secure_url } = await uploadFromBuffer(req);
+
+  if (!secure_url) {
+    return NextResponse.json({
+      success: false,
+      message: 'Please select an image',
+    });
+  }
+
+  return NextResponse.json({ success: true, secure_url });
+};
+
+let uploadFromBuffer = async (
+  req: NextRequest
+): Promise<CloudinaryUploadResponse> => {
   const data = await req.formData();
-  const file: File | null = data.get('img') as unknown as File;
+
+  console.log(data);
+
+  const file: File | null = data.get('image') as unknown as File;
 
   if (!file) {
-    return NextResponse.json({
-      success: true,
-      message: 'Image uploaded successfully.',
-      data: {
-        url: 'https://example.com/images/image.jpg',
-        thumbnailUrl: 'https://example.com/images/thumbnail.jpg',
-        filename: 'image.jpg',
-        size: '1024 KB',
-      },
+    return new Promise((res) => {
+      res({
+        success: false,
+        message: 'Please select an image',
+      });
     });
   }
 
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  return new Promise((resolve, reject) => {
+  return new Promise<CloudinaryUploadResponse>((resolve, reject) => {
     let cld_upload_stream = cloudinary.v2.uploader.upload_stream(
       {
         folder: 'foo',

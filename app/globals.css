@@ -11,39 +11,6 @@ body {
   color: white;
 }
 
-.ProseMirror-focused {
-  outline: 0;
-}
-
-.is-active-editor-btn {
-  background-color: rgb(51, 50, 50);
-  color: white;
-  padding: 10px;
-}
-
-.ProseMirror p.is-editor-empty:first-child::before {
-  color: gray;
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
-}
-
-.ProseMirror p.is-empty::before {
-  color: gray;
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
-}
-
-body
-  > main
-  > div
-  > div.jodit-react-container
-  > div
-  > div.jodit-status-bar.jodit-status-bar_resize-handle_true
-  > div:nth-child(4)
-  > a {
-  display: none;
+.ql-editor {
+  background-color: white;
 }

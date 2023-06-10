@@ -1,10 +1,20 @@
+// @ts-nocheck
 'use client';
 import React, { useState, useMemo, useRef } from 'react';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
+import hljs from 'highlight.js';
 import 'react-quill/dist/quill.snow.css';
+// import 'highlight.js/styles/darcula.css';
+import 'highlight.js/styles/default.css';
+import Button from '@/components/Button';
 
-const Editor = () => {
-  const [content, setContent] = useState('');
+interface IEditor {
+  handleSavePost: () => void;
+  setContent: (v) => void;
+  content: string;
+}
+
+const Editor = ({ handleSavePost, setContent, content }: IEditor) => {
   const quillRef = useRef();
   const imageHandler = async () => {
     const editor = quillRef.current?.getEditor();
@@ -20,7 +30,7 @@ const Editor = () => {
     input.click();
 
     input.onchange = async () => {
-      const file = input.files[0];
+      const file = input?.files[0];
 
       if (!file) {
         console.log('No file selected');
@@ -35,23 +45,27 @@ const Editor = () => {
       const formData = new FormData();
       formData.append('image', file);
 
+      const range = editor.getSelection(true);
+      editor.insertEmbed(range.index, 'image', `/images/placeholder.png`);
+      editor.setSelection(range.index + 1);
+
       try {
         const response = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
         });
-        console.log
+        console.log(response);
 
-        // if (response.ok) {
-        //   const data = await response.json();
-        //   const imageUrl = data.url;
+        if (response.ok) {
+          const data = await response.json();
+          const imageUrl = data.secure_url;
 
-        //   const range = editor.getSelection(true);
-        //   editor.insertEmbed(range.index, 'image', imageUrl);
-        //   editor.setSelection(range.index + 1);
-        // } else {
-        //   console.error('Image upload failed');
-        // }
+          editor.deleteText(range.index, 1);
+          editor.insertEmbed(range.index, 'image', imageUrl);
+          editor.setSelection(range.index + 1);
+        } else {
+          console.error('Image upload failed');
+        }
       } catch (error) {
         console.error('Image upload failed', error);
       }
@@ -66,74 +80,40 @@ const Editor = () => {
     () => ({
       toolbar: {
         container: [
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          [{ header: [1, 2, false] }],
           ['bold', 'italic', 'underline', 'strike'],
-          [
-            { list: 'ordered' },
-            { list: 'bullet' },
-            { indent: '-1' },
-            { indent: '+1' },
-          ],
-          ['image', 'link'],
-          [
-            {
-              color: [
-                '#000000',
-                '#e60000',
-                '#ff9900',
-                '#ffff00',
-                '#008a00',
-                '#0066cc',
-                '#9933ff',
-                '#ffffff',
-                '#facccc',
-                '#ffebcc',
-                '#ffffcc',
-                '#cce8cc',
-                '#cce0f5',
-                '#ebd6ff',
-                '#bbbbbb',
-                '#f06666',
-                '#ffc266',
-                '#ffff66',
-                '#66b966',
-                '#66a3e0',
-                '#c285ff',
-                '#888888',
-                '#a10000',
-                '#b26b00',
-                '#b2b200',
-                '#006100',
-                '#0047b2',
-                '#6b24b2',
-                '#444444',
-                '#5c0000',
-                '#663d00',
-                '#666600',
-                '#003700',
-                '#002966',
-                '#3d1466',
-              ],
-            },
-          ],
+          [{ align: [] }],
+          ['blockquote', 'code-block'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ script: 'sub' }, { script: 'super' }],
+          [{ indent: '-1' }, { indent: '+1' }],
+          [{ direction: 'rtl' }],
+          [{ color: [] }, { background: [] }],
+          ['link', 'image', 'video'],
+          ['clean'],
         ],
         handlers: {
           image: imageHandler,
         },
+      },
+      syntax: {
+        highlight: (text) => hljs.highlightAuto(text).value,
       },
     }),
     []
   );
 
   return (
-    <div>
-      <h2>React Quill</h2>
+    <div className='space-y-14'>
       <ReactQuill
+        placeholder='Hello world....'
+        className='bg-white h-96'
         ref={quillRef}
         value={content}
         onChange={handleEditorChange}
         modules={modules}
       />
+      <Button onClick={handleSavePost}>Save post</Button>
     </div>
   );
 };
