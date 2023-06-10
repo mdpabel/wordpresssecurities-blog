@@ -37,11 +37,26 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const POST = async (req: NextRequest) => {
-  const res = await uploadFromBuffer(req);
+  console.log(req);
 
-  return NextResponse.json({
-    success: true,
-  });
+  // const res = await uploadFromBuffer(req);
+
+  return NextResponse.json(
+    {
+      success: true,
+      message: 'Image uploaded successfully.',
+      data: {
+        url: 'https://res.cloudinary.com/divg4kqqk/image/upload/v1686392050/foo/gvjfn3i3cqp3paobudzo.jpg',
+        thumbnailUrl:
+          'https://res.cloudinary.com/divg4kqqk/image/upload/v1686392050/foo/gvjfn3i3cqp3paobudzo.jpg',
+        filename: 'image.jpg',
+        size: '1024 KB',
+      },
+    },
+    {
+      status: 200,
+    }
+  );
 };
 
 let uploadFromBuffer = async (req: NextRequest) => {
@@ -49,7 +64,16 @@ let uploadFromBuffer = async (req: NextRequest) => {
   const file: File | null = data.get('img') as unknown as File;
 
   if (!file) {
-    return NextResponse.json({ success: false });
+    return NextResponse.json({
+      success: true,
+      message: 'Image uploaded successfully.',
+      data: {
+        url: 'https://example.com/images/image.jpg',
+        thumbnailUrl: 'https://example.com/images/thumbnail.jpg',
+        filename: 'image.jpg',
+        size: '1024 KB',
+      },
+    });
   }
 
   const bytes = await file.arrayBuffer();
