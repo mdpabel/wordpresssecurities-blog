@@ -1,7 +1,9 @@
+import dynamic from 'next/dynamic'
+
 import ComponentWrapper from '@/components/ComponentWrapper';
 import React from 'react';
 import Title from './Title';
-import EditorJodit from './EditorJodit';
+const EditorJodit = dynamic(() => import('./EditorJodit'), { ssr: false }); 
 
 const Dashboard = () => {
   return (
