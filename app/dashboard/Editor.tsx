@@ -7,14 +7,39 @@ import 'react-quill/dist/quill.snow.css';
 // import 'highlight.js/styles/darcula.css';
 import 'highlight.js/styles/default.css';
 import Button from '@/components/Button';
+import { UploadIcon } from '@/components/icons';
+import SEO from './SEO';
+import CoverImg from './CoverImg';
 
 interface IEditor {
   handleSavePost: () => void;
   setContent: (v) => void;
   content: string;
+  setCoverImg: React.Dispatch<React.SetStateAction<string>>;
+  coverImg: string;
+  metas: {
+    title: string;
+    description: string;
+    keywords: string;
+  };
+  setMetas: React.Dispatch<
+    React.SetStateAction<{
+      title: string;
+      description: string;
+      keywords: string;
+    }>
+  >;
 }
 
-const Editor = ({ handleSavePost, setContent, content }: IEditor) => {
+const Editor = ({
+  handleSavePost,
+  setContent,
+  content,
+  coverImg,
+  setCoverImg,
+  metas,
+  setMetas,
+}: IEditor) => {
   const quillRef = useRef();
   const imageHandler = async () => {
     const editor = quillRef.current?.getEditor();
@@ -103,16 +128,22 @@ const Editor = ({ handleSavePost, setContent, content }: IEditor) => {
     []
   );
 
+  console.log(coverImg);
+
   return (
     <div className='space-y-14'>
       <ReactQuill
         placeholder='Hello world....'
-        className='bg-white h-96'
+        className='bg-white h-80'
         ref={quillRef}
         value={content}
         onChange={handleEditorChange}
         modules={modules}
       />
+      <div className='flex flex-col space-x-8 space-y-8 md:justify-between md:flex-row md:items-center'>
+        <SEO metas={metas} setMetas={setMetas} />
+        <CoverImg setCoverImg={setCoverImg} coverImg={coverImg} />
+      </div>
       <Button onClick={handleSavePost}>Save post</Button>
     </div>
   );
