@@ -1,15 +1,8 @@
+import cloudinary from '@/utils/cloudinaryConfig';
 import { NextRequest, NextResponse } from 'next/server';
-import cloudinary from 'cloudinary';
 import streamifier from 'streamifier';
 
-cloudinary.v2.config({
-  cloud_name: 'divg4kqqk',
-  api_key: '416832266753631',
-  api_secret: 'DpcR-Nv_ueTL208bV8q8ue_hU9s',
-});
-
 export const GET = async (req: NextRequest) => {
-  console.log('CALLED');
   return NextResponse.json({
     success: true,
     time: '2021-12-23 16:30:01',
@@ -58,8 +51,6 @@ let uploadFromBuffer = async (
   req: NextRequest
 ): Promise<CloudinaryUploadResponse> => {
   const data = await req.formData();
-
-  console.log(data);
 
   const file: File | null = data.get('image') as unknown as File;
 

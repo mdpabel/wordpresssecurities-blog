@@ -10,6 +10,7 @@ import Button from '@/components/Button';
 import { UploadIcon } from '@/components/icons';
 import SEO from './SEO';
 import CoverImg from './CoverImg';
+import Spinner from '@/components/Spinner';
 
 interface IEditor {
   handleSavePost: () => void;
@@ -17,6 +18,7 @@ interface IEditor {
   content: string;
   setCoverImg: React.Dispatch<React.SetStateAction<string>>;
   coverImg: string;
+  isLoading: boolean;
   metas: {
     title: string;
     description: string;
@@ -39,6 +41,7 @@ const Editor = ({
   setCoverImg,
   metas,
   setMetas,
+  isLoading,
 }: IEditor) => {
   const quillRef = useRef();
   const imageHandler = async () => {
@@ -128,8 +131,6 @@ const Editor = ({
     []
   );
 
-  console.log(coverImg);
-
   return (
     <div className='space-y-14'>
       <ReactQuill
@@ -144,7 +145,9 @@ const Editor = ({
         <SEO metas={metas} setMetas={setMetas} />
         <CoverImg setCoverImg={setCoverImg} coverImg={coverImg} />
       </div>
-      <Button onClick={handleSavePost}>Save post</Button>
+      <Button className='flex' onClick={handleSavePost}>
+        Save post {isLoading ? <Spinner /> : null}
+      </Button>
     </div>
   );
 };

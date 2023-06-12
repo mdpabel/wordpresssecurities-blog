@@ -1,5 +1,5 @@
 'use client';
-import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 interface ITitle {
@@ -21,9 +21,9 @@ const Title = ({ setTitle, title }: ITitle) => {
         <h4 className='font-semibold'>Permalink:</h4>
         <Link
           target='_blank'
-          href={`https://www.wordpresssecurities.com/` + title}
+          href={window.location.origin + '/' + title.toLowerCase()}
         >
-          {`https://www.wordpresssecurities.com/` + title}
+          {window.location.origin + '/' + title.toLowerCase()}
         </Link>
       </div>
     </div>
