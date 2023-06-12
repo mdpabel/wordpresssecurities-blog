@@ -1,6 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useOrigin } from '@/hooks/useOrigin';
 
 interface ITitle {
   setTitle: (e: string) => void;
@@ -8,6 +9,8 @@ interface ITitle {
 }
 
 const Title = ({ setTitle, title }: ITitle) => {
+  const origin = useOrigin();
+
   return (
     <div className='space-y-4'>
       <input
@@ -19,11 +22,8 @@ const Title = ({ setTitle, title }: ITitle) => {
       />
       <div className='flex space-x-1'>
         <h4 className='font-semibold'>Permalink:</h4>
-        <Link
-          target='_blank'
-          href={window.location.origin + '/' + title.toLowerCase()}
-        >
-          {window.location.origin + '/' + title.toLowerCase()}
+        <Link target='_blank' href={origin + '/' + title.toLowerCase()}>
+          {origin + '/' + title.toLowerCase()}
         </Link>
       </div>
     </div>
