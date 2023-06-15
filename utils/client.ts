@@ -6,7 +6,6 @@ interface configType {
 }
 
 export async function client(url: string, { data, method }: configType = {}) {
-  console.log(data);
   const config = {
     method: method ? method : 'GET',
     body: data ? JSON.stringify(data) : undefined,

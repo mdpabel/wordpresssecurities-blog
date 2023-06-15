@@ -1,7 +1,7 @@
 'use client';
-import { EmailIcon } from '@/components/icons';
 import React, { FormEvent, ReactElement, ReactNode } from 'react';
 import { JsxElement } from 'typescript';
+import { EmailIcon } from '@/components/common/icons';
 
 // const Input = ({
 //   placeholder,

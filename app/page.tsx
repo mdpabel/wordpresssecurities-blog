@@ -1,16 +1,19 @@
-import Image from 'next/image';
-import Hero from './Hero';
-import FeaturedPosts from './FeaturedPosts';
-import NewBlogs from './NewBlogs';
-import FeaturedCoupons from './FeaturedCoupons';
-import TopSecurityPlugins from './TopSecurityPlugins';
+import { use } from 'react';
+import FeaturedCoupons from '../components/home/FeaturedCoupons';
+import FeaturedPosts from '@/components/home/FeaturedPosts';
+import Hero from '@/components/home/Hero';
+import NewBlogs from './../components/home/NewBlogs';
+import TopSecurityPlugins from './../components/home/TopSecurityPlugins';
+import { getBlogs } from '@/utils/getBlogs';
 
 export default function Home() {
+  const data = use(getBlogs());
+
   return (
     <main className='flex flex-col'>
       <Hero />
-      <FeaturedPosts />
-      <NewBlogs />
+      <FeaturedPosts blogs={data} />
+      <NewBlogs blogs={data} />
       <FeaturedCoupons />
       <TopSecurityPlugins />
     </main>

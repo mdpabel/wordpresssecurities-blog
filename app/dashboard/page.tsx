@@ -1,12 +1,14 @@
 'use client';
 import dynamic from 'next/dynamic';
-import ComponentWrapper from '@/components/ComponentWrapper';
 import React, { useState } from 'react';
-import Title from './Title';
-const Editor = dynamic(() => import('./Editor'), { ssr: false });
-import SEO from './SEO';
+const Editor = dynamic(() => import('../../components/dashboard/Editor'), {
+  ssr: false,
+});
 import { client } from '@/utils/client';
 import { useAsync } from '@/hooks/useAsync';
+import ComponentWrapper from '@/components/common/ComponentWrapper';
+import Title from '@/components/dashboard/Title';
+import { DangerToast } from '@/components/common/Toast';
 
 interface MetaFormElements extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -15,6 +17,13 @@ interface MetaFormElements extends HTMLFormControlsCollection {
 }
 
 const Dashboard = () => {
+  const [errors, setErrors] = useState({
+    title: '',
+    coverImg: '',
+    metas: '',
+    content: '',
+    hasError: false,
+  });
   const { data, status, run, isLoading, isSuccess, isError } = useAsync();
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
@@ -32,6 +41,39 @@ const Dashboard = () => {
       metas,
       content,
     };
+
+    let hasError = false;
+
+    if (title.length < 25) {
+      setErrors({
+        ...errors,
+        title: 'Title must be 25 or more characters',
+      });
+      hasError = true;
+    }
+    if (!coverImg) {
+      setErrors({
+        ...errors,
+        coverImg: 'Cover image is required',
+      });
+      hasError = true;
+    }
+    if (content.length < 100) {
+      setErrors({
+        ...errors,
+        content: 'Blog body must be 100 or more characters',
+      });
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrors({
+        ...errors,
+        hasError: true,
+      });
+      return;
+    }
+
     run(
       client('/api/blog', {
         method: 'POST',
@@ -40,10 +82,8 @@ const Dashboard = () => {
     );
   };
 
-  console.log(status);
-
   return (
-    <ComponentWrapper className='pt-10 space-y-5 min-h-[80vh]'>
+    <ComponentWrapper className='pt-10 space-y-8 min-h-[80vh]'>
       <Title setTitle={setTitle} title={title} />
       <Editor
         isLoading={isLoading}

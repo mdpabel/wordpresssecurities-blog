@@ -17,7 +17,7 @@ interface ISeo {
 
 const SEO = ({ metas, setMetas }: ISeo) => {
   return (
-    <div className='w-full p-8 mx-auto space-y-4 border rounded md:w-1/2'>
+    <div className='w-full p-8 mx-auto space-y-4 mt-20 border rounded md:w-1/2'>
       <div className='flex flex-col space-y-3'>
         <label htmlFor='title'>Meta Title</label>
         <input

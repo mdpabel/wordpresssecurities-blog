@@ -1,6 +1,6 @@
-import ComponentWrapper from '@/components/ComponentWrapper';
 import Link from 'next/link';
 import React from 'react';
+import ComponentWrapper from '../common/ComponentWrapper';
 
 const TopBar = () => {
   return (

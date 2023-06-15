@@ -6,11 +6,11 @@ import hljs from 'highlight.js';
 import 'react-quill/dist/quill.snow.css';
 // import 'highlight.js/styles/darcula.css';
 import 'highlight.js/styles/default.css';
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import { UploadIcon } from '@/components/icons';
 import SEO from './SEO';
 import CoverImg from './CoverImg';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/components/common/Spinner';
 
 interface IEditor {
   handleSavePost: () => void;
@@ -82,7 +82,6 @@ const Editor = ({
           method: 'POST',
           body: formData,
         });
-        console.log(response);
 
         if (response.ok) {
           const data = await response.json();

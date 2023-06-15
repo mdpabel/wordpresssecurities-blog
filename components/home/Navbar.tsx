@@ -6,9 +6,9 @@ import {
   FacebookIcon,
   LinkedinIcon,
   TwitterIcon,
-} from '@/components/icons';
+} from '@/components/common/icons';
 import Link from 'next/link';
-import ComponentWrapper from '@/components/ComponentWrapper';
+import ComponentWrapper from '../common/ComponentWrapper';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);

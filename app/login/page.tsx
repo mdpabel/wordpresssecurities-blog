@@ -1,8 +1,13 @@
 'use client';
-import { EmailIcon, LockIcon, OpenEye, CloseEye } from '@/components/icons';
 import React, { useState } from 'react';
-import ComponentWrapper from '@/components/ComponentWrapper';
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
+import ComponentWrapper from '@/components/common/ComponentWrapper';
+import {
+  CloseEye,
+  EmailIcon,
+  LockIcon,
+  OpenEye,
+} from '@/components/common/icons';
 
 const Login = () => {
   const [isTrue, setIsTrue] = useState(false);

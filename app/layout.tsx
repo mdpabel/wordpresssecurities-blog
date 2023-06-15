@@ -1,7 +1,7 @@
-import Header from '@/app/Header';
 import './globals.css';
 import { Playfair_Display } from 'next/font/google';
-import Footer from './Footer';
+import Header from './../components/home/Header';
+import Footer from './../components/home/Footer';
 
 const playfair = Playfair_Display({ subsets: ['latin'] });
 

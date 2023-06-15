@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, ChangeEvent } from 'react';
-import { UploadIcon } from '@/components/icons';
+import { UploadIcon } from '@/components/common/icons';
 
 interface ICoverImg {
   setCoverImg: React.Dispatch<React.SetStateAction<string>>;

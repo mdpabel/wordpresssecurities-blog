@@ -1,7 +1,7 @@
-import { Title } from '@/components/Title';
 import React from 'react';
-import ComponentWrapper from '@/components/ComponentWrapper';
-import { HostingCard } from '@/components/Card';
+import { HostingCard } from '../common/Card';
+import ComponentWrapper from '../common/ComponentWrapper';
+import { Title } from '../common/Title';
 
 const TopSecurityPlugins = () => {
   return (

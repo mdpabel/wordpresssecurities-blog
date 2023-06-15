@@ -1,11 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
+import { BlogType } from '@/types/models';
+import Image from 'next/image';
 
-export const BigCard = ({ className = '' }: { className?: string }) => {
+interface ICard {
+  className?: string;
+  blog: BlogType;
+}
+
+export const BigCard = ({ className = '', blog }: ICard) => {
   return (
     <div className={className}>
       <div
-        className={`flex flex-col w-full h-full bg-white p-8 rounded-md shadow `}
+        className={`flex flex-col justify-between w-full h-full bg-white p-8 rounded-md shadow `}
       >
         <img
           width='400'
@@ -14,15 +21,14 @@ export const BigCard = ({ className = '' }: { className?: string }) => {
           src='https://www.elegantthemes.com/blog/wp-content/uploads/2021/12/wordpress-hacked-featured-image-1.jpg'
           alt=''
         />
-        <div className='space-y-4 h-1/2'>
+        <div className='flex flex-col justify-between space-y-4 h-1/2'>
           <div className='space-y-1'>
             <span className='font-medium text-gray-700'>11 December 2022</span>
             <h2 className='text-lg font-semibold tracking-wide'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing.
+              {blog?.title?.slice(0, 45)}...
             </h2>
             <p className='text-sm tracking-wide'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-              aperiam adipisicing elit. Rem, aperiam.
+              {blog?.metaDescription?.slice(0, 100)}
             </p>
           </div>
           <div className='flex items-center space-x-4'>
@@ -34,7 +40,7 @@ export const BigCard = ({ className = '' }: { className?: string }) => {
               alt=''
             />
             <div>
-              <h4 className='text-sm font-semibold'>MD Pabel</h4>
+              <h4 className='text-sm font-semibold'>{blog?.author?.name}</h4>
               <h6 className='text-sm text-gray-700'>Software engineer</h6>
             </div>
           </div>
@@ -44,7 +50,7 @@ export const BigCard = ({ className = '' }: { className?: string }) => {
   );
 };
 
-export const SmallCard = ({ className = '' }: { className?: string }) => {
+export const SmallCard = ({ className = '', blog }: ICard) => {
   return (
     <div
       className={`flex px-3 md:px-2 py-4 bg-white rounded shadow ` + className}
@@ -62,7 +68,7 @@ export const SmallCard = ({ className = '' }: { className?: string }) => {
             11 December 2022
           </span>
           <h2 className='text-sm font-medium'>
-            Lorem ipsum, dolor sit amet consectetur adipisicing.
+            {blog?.title?.slice(0, 50)}...
           </h2>
         </div>
         <div className='flex space-x-2 md:space-x-4'>
@@ -74,7 +80,7 @@ export const SmallCard = ({ className = '' }: { className?: string }) => {
             alt=''
           />
           <div>
-            <h4 className='text-xs font-semibold'>MD Pabel</h4>
+            <h4 className='text-xs font-semibold'>{blog?.author?.name}</h4>
             <h6 className='text-xs text-gray-700'>Software engineer</h6>
           </div>
         </div>
