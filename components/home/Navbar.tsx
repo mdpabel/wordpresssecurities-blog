@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   BarIcon,
   CrossIcon,
@@ -12,6 +12,19 @@ import ComponentWrapper from '../common/ComponentWrapper';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    const event = (e) => {
+      if (ref.current && !ref.current?.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('click', event, true);
+
+    return () => document.removeEventListener('click', event, true);
+  }, []);
 
   return (
     <div
@@ -21,7 +34,7 @@ const Navbar = () => {
       }}
     >
       <ComponentWrapper>
-        <nav className='flex items-center justify-between py-5'>
+        <nav ref={ref} className='flex items-center justify-between py-5'>
           <Link href='/' className='text-xl font-bold md:text-2xl'>
             WPSecurities.
           </Link>
@@ -84,7 +97,10 @@ const Navbar = () => {
             {open ? (
               <CrossIcon className='w-6 h-6 font-bold text-gray-800' />
             ) : (
-              <BarIcon className='w-6 h-6 font-bold text-gray-800' />
+              // @ts-ignore
+              <div>
+                <BarIcon className='w-6 h-6 font-bold text-gray-800' />
+              </div>
             )}
           </button>
         </nav>
