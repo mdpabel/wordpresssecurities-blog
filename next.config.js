@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: [
-    'res.cloudinary.com',
-    'elegantthemes.com',
-    'loremflickr.com',
-    'picsum.photos',
-  ],
+  images: {
+    domains: [
+      'res.cloudinary.com',
+      'elegantthemes.com',
+      'loremflickr.com',
+      'picsum.photos',
+    ],
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

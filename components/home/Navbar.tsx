@@ -12,10 +12,10 @@ import ComponentWrapper from '../common/ComponentWrapper';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const ref = useRef();
+  const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const event = (e) => {
+    const event = (e: any) => {
       if (ref.current && !ref.current?.contains(e.target)) {
         setOpen(false);
       }
