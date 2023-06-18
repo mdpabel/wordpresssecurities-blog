@@ -4,13 +4,7 @@ export async function getBlogs() {
   try {
     const res = await prisma.post.findMany({
       include: {
-        author: {
-          select: {
-            firstName: true,
-            lastName: true,
-            profilePic: true,
-          },
-        },
+        author: true,
       },
       orderBy: {
         createAt: 'desc',

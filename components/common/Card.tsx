@@ -14,12 +14,12 @@ export const BigCard = ({ className = '', blog }: ICard) => {
       <div
         className={`flex flex-col justify-between w-full h-full bg-white p-8 rounded-md shadow `}
       >
-        <img
+        <Image
           width='400'
           height='400'
           className='w-full max-h-[50%]'
-          src='https://www.elegantthemes.com/blog/wp-content/uploads/2021/12/wordpress-hacked-featured-image-1.jpg'
-          alt=''
+          src={blog?.coverImage}
+          alt={blog?.title}
         />
         <div className='flex flex-col justify-between space-y-4 h-1/2'>
           <div className='space-y-1'>
@@ -32,16 +32,21 @@ export const BigCard = ({ className = '', blog }: ICard) => {
             </p>
           </div>
           <div className='flex items-center space-x-4'>
-            <img
+            <Image
               width='40'
               height='40'
               className='w-10 h-10 rounded-full'
-              src='https://avatars.githubusercontent.com/u/64641522?s=400&v=4'
-              alt=''
+              src={blog?.author?.profilePic}
+              alt={blog?.author?.firstName + ' ' + blog?.author?.lastName}
             />
             <div>
-              <h4 className='text-sm font-semibold'>{blog?.author?.name}</h4>
-              <h6 className='text-sm text-gray-700'>Software engineer</h6>
+              <h4 className='text-sm font-semibold'>
+                {blog?.author?.firstName + ' ' + blog?.author?.lastName}
+              </h4>
+              <h6 className='text-sm text-gray-700'>
+                {' '}
+                {blog?.author?.occupation}
+              </h6>
             </div>
           </div>
         </div>
@@ -55,12 +60,12 @@ export const SmallCard = ({ className = '', blog }: ICard) => {
     <div
       className={`flex px-3 md:px-2 py-4 bg-white rounded shadow ` + className}
     >
-      <img
+      <Image
         width='60'
         height='60'
-        className='w-2/5'
-        src='https://www.elegantthemes.com/blog/wp-content/uploads/2021/12/wordpress-hacked-featured-image-1.jpg'
-        alt=''
+        className='w-2/5 mr-2'
+        src={blog?.coverImage}
+        alt={blog?.title}
       />
       <div className='w-3/5 space-y-3'>
         <div>
@@ -72,16 +77,20 @@ export const SmallCard = ({ className = '', blog }: ICard) => {
           </h2>
         </div>
         <div className='flex space-x-2 md:space-x-4'>
-          <img
+          <Image
             width='30'
             height='30'
             className='w-8 h-8 rounded-full'
-            src='https://avatars.githubusercontent.com/u/64641522?s=400&v=4'
-            alt=''
+            src={blog?.author?.profilePic}
+            alt={blog?.author?.firstName + ' ' + blog?.author?.lastName}
           />
           <div>
-            <h4 className='text-xs font-semibold'>{blog?.author?.name}</h4>
-            <h6 className='text-xs text-gray-700'>Software engineer</h6>
+            <h4 className='text-xs font-semibold'>
+              {blog?.author?.firstName + ' ' + blog?.author?.lastName}
+            </h4>
+            <h6 className='text-xs text-gray-700'>
+              {blog?.author?.occupation}
+            </h6>
           </div>
         </div>
       </div>
