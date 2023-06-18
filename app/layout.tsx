@@ -1,5 +1,6 @@
 import './globals.css';
 import { Playfair_Display } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
 import Header from './../components/home/Header';
 import Footer from './../components/home/Footer';
 
@@ -16,14 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body suppressHydrationWarning={true} className={playfair.className}>
-        <main className=''>
-          <Header />
-          {children}
-          <Footer />
-        </main>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en'>
+        <body suppressHydrationWarning={true} className={playfair.className}>
+          <main className=''>
+            <Header />
+            {children}
+            <Footer />
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

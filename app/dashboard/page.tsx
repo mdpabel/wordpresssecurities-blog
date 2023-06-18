@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 const Editor = dynamic(() => import('../../components/dashboard/Editor'), {
   ssr: false,
 });
@@ -9,6 +9,8 @@ import { useAsync } from '@/hooks/useAsync';
 import ComponentWrapper from '@/components/common/ComponentWrapper';
 import Title from '@/components/dashboard/Title';
 import { DangerToast } from '@/components/common/Toast';
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 interface MetaFormElements extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -17,6 +19,7 @@ interface MetaFormElements extends HTMLFormControlsCollection {
 }
 
 const Dashboard = () => {
+  const router = useRouter();
   const [errors, setErrors] = useState({
     title: '',
     coverImg: '',
@@ -33,6 +36,16 @@ const Dashboard = () => {
     description: '',
     keywords: '',
   });
+
+  useEffect(() => {
+    fetch('/api/profile')
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.success) {
+          router.replace('/new-user');
+        }
+      });
+  }, [router]);
 
   const handleSavePost = () => {
     const data = {

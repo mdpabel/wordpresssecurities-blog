@@ -15,10 +15,33 @@ model User {
   createAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name     String
-  email    String @unique
-  password String
-  Post     Post[]
+  firstName   String
+  lastName    String
+  email       String @unique
+  clerkUserId String
+  role        ROLE   @default(READER)
+  profilePic  String
+  occupation  String
+  bio         String
+  Post        Post[]
+  links       Link[]
+}
+
+model Link {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  type   String
+  url    String
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.ObjectId
+}
+
+enum ROLE {
+  ADMIN
+  GUEST
+  READER
 }
 
 model Post {

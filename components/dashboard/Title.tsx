@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useOrigin } from '@/hooks/useOrigin';
+import { generateSlug } from '@/utils/generateSlug';
 
 interface ITitle {
   setTitle: (e: string) => void;
@@ -10,6 +11,7 @@ interface ITitle {
 
 const Title = ({ setTitle, title }: ITitle) => {
   const origin = useOrigin();
+  const slug = generateSlug(title);
 
   return (
     <div className='space-y-4'>
@@ -23,7 +25,7 @@ const Title = ({ setTitle, title }: ITitle) => {
       <div className='flex space-x-1'>
         <h4 className='font-semibold'>Permalink:</h4>
         <Link target='_blank' href={origin + '/' + title.toLowerCase()}>
-          {origin + '/' + title.toLowerCase()}
+          {origin + '/' + slug}
         </Link>
       </div>
     </div>

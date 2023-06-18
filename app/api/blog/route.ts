@@ -1,5 +1,7 @@
 import prisma from '@/db/mongo';
 import cloudinary from '@/utils/cloudinaryConfig';
+import { getCurrentUser } from '@/utils/getCurrentUser';
+import { User } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest) => {
@@ -7,6 +9,7 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const POST = async (req: NextRequest) => {
+  const user = (await getCurrentUser()) as User;
   try {
     const body: {
       title: string;
@@ -19,12 +22,6 @@ export const POST = async (req: NextRequest) => {
       content: string;
     } = await req.json();
 
-    const user = await prisma.user.findFirst({
-      where: {
-        email: 'pabel7396@gmail.com',
-      },
-    });
-
     const coverImage = await cloudinary.v2.uploader.upload(body.coverImg, {
       overwrite: true,
       invalidate: true,
@@ -32,18 +29,6 @@ export const POST = async (req: NextRequest) => {
       height: 250,
       crop: 'fill',
     });
-
-    if (!user) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: 'You are not allowed to post',
-        },
-        {
-          status: 401,
-        }
-      );
-    }
 
     const newBlog = await prisma.post.create({
       data: {
@@ -53,7 +38,7 @@ export const POST = async (req: NextRequest) => {
         metaDescription: body.metas.description,
         metaKeywords: body.metas.keywords,
         metaTitle: body.metas.title,
-        authorId: user?.id,
+        authorId: user?.id as string,
       },
     });
 

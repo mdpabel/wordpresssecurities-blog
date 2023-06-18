@@ -6,9 +6,9 @@ export async function getBlogs() {
       include: {
         author: {
           select: {
-            name: true,
-            email: true,
-            id: true,
+            firstName: true,
+            lastName: true,
+            profilePic: true,
           },
         },
       },
