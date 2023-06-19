@@ -65,7 +65,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link className='text-lg font-medium' href='/dashboard'>
+              <Link prefetch className='text-lg font-medium' href='/dashboard'>
                 Dashboard
               </Link>
             </li>
@@ -153,6 +153,7 @@ const Navbar = () => {
             </li>
             <li onClick={() => setOpen(false)} className='border-b'>
               <Link
+                prefetch
                 href='/dashboard'
                 className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
               >
