@@ -1,5 +1,10 @@
+import ComponentWrapper from '@/components/common/ComponentWrapper';
 import { UserProfile } from '@clerk/nextjs';
 
-const UserProfilePage = () => <UserProfile path='/profile' routing='path' />;
+const UserProfilePage = () => (
+  <ComponentWrapper>
+    <UserProfile path='/profile' routing='path' />
+  </ComponentWrapper>
+);
 
 export default UserProfilePage;

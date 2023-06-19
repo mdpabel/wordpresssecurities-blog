@@ -64,6 +64,7 @@ const SidebarItem = ({
         className='flex justify-between w-full pb-3 border-b-2 border-gray-200 cursor-pointer'
       >
         <Link
+          prefetch
           href={link}
           className='text-sm leading-tight tracking-tight text-gray-800 capitalize select-none xl:text-lg '
         >
