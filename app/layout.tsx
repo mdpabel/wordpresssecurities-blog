@@ -1,8 +1,6 @@
-import './globals.css';
+import '../styles/globals.css';
 import { Playfair_Display } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
-import Header from './../components/home/Header';
-import Footer from './../components/home/Footer';
 
 const playfair = Playfair_Display({ subsets: ['latin'] });
 
@@ -18,13 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang='en'>
+      <html suppressHydrationWarning={true} lang='en'>
         <body suppressHydrationWarning={true} className={playfair.className}>
-          <main className=''>
-            <Header />
-            {children}
-            <Footer />
-          </main>
+          <main className=''>{children}</main>
         </body>
       </html>
     </ClerkProvider>

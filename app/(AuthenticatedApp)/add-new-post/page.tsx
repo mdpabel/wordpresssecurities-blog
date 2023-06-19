@@ -38,16 +38,6 @@ const Dashboard = () => {
     keywords: '',
   });
 
-  useEffect(() => {
-    fetch('/api/profile')
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.success) {
-          router.replace('/new-user');
-        }
-      });
-  }, [router]);
-
   const handleSavePost = () => {
     const data = {
       title,

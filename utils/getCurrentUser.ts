@@ -10,8 +10,6 @@ export const getCurrentUser = async () => {
     },
   });
 
-  console.log('res ===> ', res);
-
   if (!res) {
     return NextResponse.json(
       {
