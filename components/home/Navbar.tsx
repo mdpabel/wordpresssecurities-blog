@@ -9,6 +9,7 @@ import {
 } from '@/components/common/icons';
 import Link from 'next/link';
 import ComponentWrapper from '../common/ComponentWrapper';
+import { SignedIn } from '@clerk/nextjs';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -64,11 +65,17 @@ const Navbar = () => {
                 Security Providers
               </Link>
             </li>
-            <li>
-              <Link prefetch className='text-lg font-medium' href='/dashboard'>
-                Dashboard
-              </Link>
-            </li>
+            <SignedIn>
+              <li>
+                <Link
+                  prefetch
+                  className='text-lg font-medium'
+                  href='/dashboard'
+                >
+                  Dashboard
+                </Link>
+              </li>
+            </SignedIn>
           </ul>
 
           <ul className='hidden space-x-4 md:flex'>
@@ -156,15 +163,17 @@ const Navbar = () => {
                 Security Providers
               </Link>
             </li>
-            <li onClick={() => setOpen(false)} className='border-b'>
-              <Link
-                prefetch
-                href='/dashboard'
-                className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
-              >
-                Dashboard
-              </Link>
-            </li>
+            <SignedIn>
+              <li onClick={() => setOpen(false)} className='border-b'>
+                <Link
+                  prefetch
+                  href='/dashboard'
+                  className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
+                >
+                  Dashboard
+                </Link>
+              </li>
+            </SignedIn>
           </ul>
         </div>
       </ComponentWrapper>

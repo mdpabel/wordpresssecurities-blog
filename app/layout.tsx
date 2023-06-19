@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   classification: 'WordPress Security Blog',
   generator: 'next.js',
 };
+
 export default function RootLayout({
   children,
 }: {
