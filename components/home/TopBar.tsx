@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import ComponentWrapper from '../common/ComponentWrapper';
+import AuthNav from './AuthNav';
 
 const TopBar = () => {
   return (
@@ -12,9 +13,7 @@ const TopBar = () => {
             <ul className='flex justify-between space-x-6'>
               <li>Contact</li>
               <li>Privacy Policy</li>
-              <li>
-                <Link href='/login'>Login</Link>
-              </li>
+              <AuthNav />
             </ul>
           </nav>
         </div>
