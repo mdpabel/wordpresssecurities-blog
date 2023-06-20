@@ -24,7 +24,7 @@ const Title = ({ setTitle, title }: ITitle) => {
       />
       <div className='flex space-x-1'>
         <h4 className='font-semibold'>Permalink:</h4>
-        <Link target='_blank' href={origin + '/' + title.toLowerCase()}>
+        <Link target='_blank' href={origin + '/' + slug}>
           {origin + '/' + slug}
         </Link>
       </div>

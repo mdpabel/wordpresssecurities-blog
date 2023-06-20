@@ -11,9 +11,7 @@ export default function UnAuthenticatedAppLayout({
       <header>
         <Header />
       </header>
-      <section className='container flex flex-col items-center justify-center min-h-screen px-6 py-4 pt-32 mx-auto md:pt-0'>
-        {children}
-      </section>
+      <section>{children}</section>
       <Footer />
     </>
   );
