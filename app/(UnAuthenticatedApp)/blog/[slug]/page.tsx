@@ -10,6 +10,18 @@ type PostType = {
   slug: string;
 };
 
+export const dynamicParams = true;
+export const dynamic = 'error';
+export const revalidate = 60 * 10;
+
+export const generateStaticParams = async () => {
+  const posts = await prisma.post.findMany();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+};
+
 const getData = async (slug: string) => {
   const res = await prisma.post.findFirst({
     where: {
