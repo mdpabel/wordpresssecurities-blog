@@ -1,8 +1,10 @@
 import prisma from '@/db/mongo';
 import cloudinary from '@/utils/cloudinaryConfig';
+import { generateSlug } from '@/utils/generateSlug';
 import { getCurrentUser } from '@/utils/getCurrentUser';
 import { User } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
+import sanitizeHtml from 'sanitize-html';
 
 export const GET = async (req: NextRequest) => {
   return NextResponse.json({});
@@ -22,22 +24,25 @@ export const POST = async (req: NextRequest) => {
       content: string;
     } = await req.json();
 
-    const coverImage = await cloudinary.v2.uploader.upload(body.coverImg, {
-      overwrite: true,
-      invalidate: true,
-      width: 450,
-      height: 250,
-      crop: 'fill',
-    });
+    if (!body.content || !body.coverImg || !body.title) {
+      return NextResponse.json({
+        success: true,
+        message: 'Post body and/or cover image and/or title are missing',
+        data: null,
+      });
+    }
+
+    const coverImage = await cloudinary.v2.uploader.upload(body.coverImg);
 
     const newBlog = await prisma.post.create({
       data: {
         coverImage: coverImage.secure_url || body.coverImg,
-        content: body.content,
-        title: body.title,
-        metaDescription: body.metas.description,
-        metaKeywords: body.metas.keywords,
-        metaTitle: body.metas.title,
+        content: sanitizeHtml(body.content),
+        title: sanitizeHtml(body.title),
+        metaDescription: sanitizeHtml(body.metas.description),
+        metaKeywords: sanitizeHtml(body.metas.keywords),
+        metaTitle: sanitizeHtml(body.metas.title),
+        slug: generateSlug(sanitizeHtml(body.title)),
         authorId: user?.id as string,
       },
     });
@@ -53,6 +58,8 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({
       success: false,
       message: 'Something went wrong',
+
+      data: null,
     });
   }
 };

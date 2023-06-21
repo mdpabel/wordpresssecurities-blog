@@ -41,7 +41,7 @@ const Navbar = () => {
           </Link>
           <ul className='items-center hidden space-x-8 lg:flex'>
             <li>
-              <Link prefetch className='text-lg font-medium' href='/'>
+              <Link prefetch className='text-lg font-medium' href='/blog'>
                 Blog
               </Link>
             </li>

@@ -49,7 +49,8 @@ model Post {
   createAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  title           String  @unique
+  title           String
+  slug            String  @unique
   content         String
   coverImage      String
   published       Boolean @default(true)
@@ -59,4 +60,16 @@ model Post {
 
   author   User   @relation(fields: [authorId], references: [id])
   authorId String @db.ObjectId
+  View     View?
+}
+
+model View {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  count Int
+
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String @unique @db.ObjectId
 }

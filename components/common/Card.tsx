@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { BlogType } from '@/types/models';
 import Image from 'next/image';
+import ResponsiveImage from './ResponsiveImage';
 
 interface ICard {
   className?: string;
@@ -14,23 +15,29 @@ export const BigCard = ({ className = '', blog }: ICard) => {
       <div
         className={`flex flex-col justify-between w-full h-full bg-white p-8 rounded-md shadow `}
       >
-        <Image
-          width='400'
-          height='400'
-          className='w-full max-h-[50%]'
-          src={blog?.coverImage}
-          alt={blog?.title}
-        />
+        <Link className='block w-full max-h-[50%]' href={'/blog/' + blog?.slug}>
+          <Image
+            width={400}
+            height={400}
+            className='w-full h-full'
+            src={blog?.coverImage}
+            alt={blog?.title}
+          />
+        </Link>
         <div className='flex flex-col justify-between space-y-4 h-1/2'>
-          <div className='space-y-1'>
-            <span className='font-medium text-gray-700'>11 December 2022</span>
-            <h2 className='text-lg font-semibold tracking-wide'>
-              {blog?.title?.slice(0, 45)}...
-            </h2>
-            <p className='text-sm tracking-wide'>
-              {blog?.metaDescription?.slice(0, 100)}
-            </p>
-          </div>
+          <Link href={'/blog/' + blog?.slug}>
+            <div className='space-y-1'>
+              <span className='font-medium text-gray-700'>
+                11 December 2022
+              </span>
+              <h2 className='text-lg font-semibold tracking-wide'>
+                {blog?.title?.slice(0, 45)}...
+              </h2>
+              <p className='text-sm tracking-wide'>
+                {blog?.metaDescription?.slice(0, 100)}
+              </p>
+            </div>
+          </Link>
           <div className='flex items-center space-x-4'>
             <Image
               width='40'
@@ -61,8 +68,8 @@ export const SmallCard = ({ className = '', blog }: ICard) => {
       className={`flex px-3 md:px-2 py-4 bg-white rounded shadow ` + className}
     >
       <Image
-        width='60'
-        height='60'
+        width={100}
+        height={100}
         className='w-2/5 mr-2'
         src={blog?.coverImage}
         alt={blog?.title}

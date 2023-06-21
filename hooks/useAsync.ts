@@ -18,7 +18,7 @@ export const useAsync = <T>() => {
 
     promise
       // @ts-expect-error
-      .then(({ data }) => {
+      .then((data) => {
         setData(data);
         setStatus('SUCCESS');
       })
@@ -47,7 +47,7 @@ export const useAsync = <T>() => {
     isError: status === 'ERROR',
     isLoading: status === 'PENDING',
     isIdle: status === 'IDLE',
-    data,
+    data: data as any,
     error,
     status,
     run,
