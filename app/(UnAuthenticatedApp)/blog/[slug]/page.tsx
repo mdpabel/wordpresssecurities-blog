@@ -11,8 +11,8 @@ type PostType = {
 };
 
 export const dynamicParams = true;
-export const dynamic = 'error';
-export const revalidate = 60 * 10;
+// export const dynamic = 'error';
+// export const revalidate = 60 * 10;
 
 export const generateStaticParams = async () => {
   const posts = await prisma.post.findMany();
