@@ -16,12 +16,12 @@ import ViewCount from './ViewCount';
 
 interface ISocialShare {
   url: string;
-  id : string;
+  id: string;
 }
 
 const SocialShare = ({ url, id }: ISocialShare) => {
   return (
-    <div className='flex pb-4 space-x-4'>
+    <div className='pb-4 space-x-4 space-y-4 gird'>
       <ViewCount id={id} />
       <FacebookShareButton url={url}>
         <div
@@ -34,7 +34,7 @@ const SocialShare = ({ url, id }: ISocialShare) => {
           <span>
             <Facebook />
           </span>
-          <span>Share</span>
+          <span className='hidden md:block'>Share</span>
         </div>
       </FacebookShareButton>
 
@@ -49,7 +49,7 @@ const SocialShare = ({ url, id }: ISocialShare) => {
           <span>
             <Twitter />
           </span>
-          <span>Tweet</span>
+          <span className='hidden md:block'>Tweet</span>
         </div>
       </TwitterShareButton>
 
@@ -64,7 +64,7 @@ const SocialShare = ({ url, id }: ISocialShare) => {
           <span>
             <LinkedIn />
           </span>
-          <span>Share</span>
+          <span className='hidden md:block'>Share</span>
         </div>
       </LinkedinShareButton>
 
@@ -79,7 +79,7 @@ const SocialShare = ({ url, id }: ISocialShare) => {
           <span>
             <MailIcon />
           </span>
-          <span>Email</span>
+          <span className='hidden md:block'>Email</span>
         </div>
       </EmailShareButton>
     </div>

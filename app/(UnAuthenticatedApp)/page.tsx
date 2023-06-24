@@ -7,7 +7,6 @@ import TopSecurityPlugins from '../../components/home/TopSecurityPlugins';
 import { getBlogs } from '@/utils/getBlogs';
 
 export const dynamic = 'force-static';
-export const revalidate = 60 * 10;
 
 export default function Home() {
   const data = use(getBlogs());

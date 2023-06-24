@@ -1,28 +1,27 @@
-import SocialShare from '@/components/blog/SocialShare';
-import ComponentWrapper from '@/components/common/ComponentWrapper';
-
-import prisma from '@/db/mongo';
-import { formateDate, formateDateAndTime } from '@/utils/formateDate';
 import { notFound } from 'next/navigation';
 import React, { use } from 'react';
+import SocialShare from '@/components/blog/SocialShare';
+import ComponentWrapper from '@/components/common/ComponentWrapper';
+import prisma from '@/db/mongo';
+import { formateDate } from '@/utils/formateDate';
 
 type PostType = {
-  slug: string;
+  params: { slug: string };
 };
-
 export const dynamicParams = true;
-// export const dynamic = 'error';
-// export const revalidate = 60 * 10;
 
-export const generateStaticParams = async () => {
+export async function generateStaticParams() {
   const posts = await prisma.post.findMany();
 
   return posts.map((post) => ({
     slug: post.slug,
   }));
-};
+}
 
 const getData = async (slug: string) => {
+  if (!slug) {
+    return notFound();
+  }
   const res = await prisma.post.findFirst({
     where: {
       slug: slug,
@@ -37,15 +36,16 @@ const getData = async (slug: string) => {
       },
     },
   });
-  if (!res) {
-    return notFound();
-  }
 
   return res;
 };
 
-const Post = ({ slug }: PostType) => {
-  const data = use(getData(slug));
+const Post = ({ params }: PostType) => {
+  const data = use(getData(params?.slug));
+
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <ComponentWrapper className='flex flex-col mt-10 space-x-8 md:flex-row'>
@@ -57,7 +57,7 @@ const Post = ({ slug }: PostType) => {
         </div>
         <SocialShare
           id={data?.id}
-          url={`https://wordpresssecurites.com/${slug}`}
+          url={`https://wordpresssecurites.com/${params?.slug}`}
         />
         <div dangerouslySetInnerHTML={{ __html: data?.content }}></div>
       </div>

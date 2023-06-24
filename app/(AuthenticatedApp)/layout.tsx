@@ -6,11 +6,13 @@ export default function AuthenticatedAppLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className='flex flex-no-wrap h-full min-h-screen'>
-      <aside>
-        <Sidebar />
-      </aside>
-      <section className='w-full'>{children}</section>
-    </div>
+    <>
+      <div className='flex flex-no-wrap h-full min-h-screen'>
+        <aside>
+          <Sidebar />
+        </aside>
+        <section className='w-full'>{children}</section>
+      </div>
+    </>
   );
 }

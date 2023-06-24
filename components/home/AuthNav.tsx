@@ -1,12 +1,5 @@
 'use client';
-import {
-  RedirectToUserProfile,
-  SignedIn,
-  SignedOut,
-  SignOutButton,
-  UserProfile,
-  useUser,
-} from '@clerk/nextjs';
+import { SignedIn, SignedOut, useUser, ClerkProvider } from '@clerk/nextjs';
 import Link from 'next/link';
 
 const AuthNav = () => {

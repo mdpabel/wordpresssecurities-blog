@@ -8,9 +8,9 @@ export default function UnAuthenticatedAppLayout({
 }) {
   return (
     <>
-      <header>
+      {/* <header>
         <Header />
-      </header>
+      </header> */}
       <section>{children}</section>
       <Footer />
     </>

@@ -33,12 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html suppressHydrationWarning={true} lang='en'>
-        <body suppressHydrationWarning={true} className={playfair.className}>
-          <main className=''>{children}</main>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html suppressHydrationWarning={true} lang='en'>
+      <body suppressHydrationWarning={true} className={playfair.className}>
+        <main className=''>{children}</main>
+      </body>
+    </html>
   );
 }
