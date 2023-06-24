@@ -8,7 +8,9 @@ import { formateDate } from '@/utils/formateDate';
 type PostType = {
   params: { slug: string };
 };
+
 export const dynamicParams = true;
+export const dynamic = 'force-static';
 
 export async function generateStaticParams() {
   const posts = await prisma.post.findMany();
