@@ -1,6 +1,7 @@
 'use client';
+
 import { useUser } from '@clerk/nextjs';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import LinkComponent from '@/components/Add-New/LinkComponent';
 import Button from '@/components/common/Button';
 import ComponentWrapper from '@/components/common/ComponentWrapper';
@@ -9,8 +10,10 @@ import Input, { InputWrapper, TextArea } from '@/components/common/Input';
 import { createNewUser } from '@/utils/user';
 import { useAsync } from '@/hooks/useAsync';
 import Spinner from '@/components/common/Spinner';
+import { useRouter } from 'next/navigation';
 
 const NewUser = () => {
+  const router = useRouter();
   const user = useUser();
   const { run, isSuccess, isLoading, isError, data, error } = useAsync();
   const [image, setImage] = useState('');
@@ -22,6 +25,12 @@ const NewUser = () => {
       type: '',
     },
   ]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.replace('/dashboard');
+    }
+  }, [isSuccess, router]);
 
   const saveProfile = () => {
     run(

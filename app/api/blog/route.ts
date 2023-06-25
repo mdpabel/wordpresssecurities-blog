@@ -3,6 +3,7 @@ import cloudinary from '@/utils/cloudinaryConfig';
 import { generateSlug } from '@/utils/generateSlug';
 import { getCurrentUser } from '@/utils/getCurrentUser';
 import { User } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import sanitizeHtml from 'sanitize-html';
 
@@ -46,6 +47,9 @@ export const POST = async (req: NextRequest) => {
         authorId: user?.id as string,
       },
     });
+
+    revalidatePath('/');
+    // revalidatePath('/blog/' + newBlog?.slug);
 
     return NextResponse.json({
       success: true,
