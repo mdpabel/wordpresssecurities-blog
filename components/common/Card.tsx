@@ -19,7 +19,7 @@ export const BigCard = ({ className = '', blog }: ICard) => {
           <Image
             width={400}
             height={400}
-            className='w-full h-full'
+            className='object-cover object-center w-full h-full'
             src={blog?.coverImage}
             alt={blog?.title}
           />
@@ -42,7 +42,7 @@ export const BigCard = ({ className = '', blog }: ICard) => {
             <Image
               width='40'
               height='40'
-              className='w-10 h-10 rounded-full'
+              className='object-cover object-center w-10 h-10 rounded-full'
               src={blog?.author?.profilePic}
               alt={blog?.author?.firstName + ' ' + blog?.author?.lastName}
             />
@@ -67,27 +67,31 @@ export const SmallCard = ({ className = '', blog }: ICard) => {
     <div
       className={`flex px-3 md:px-2 py-4 bg-white rounded shadow ` + className}
     >
-      <Image
-        width={100}
-        height={100}
-        className='w-2/5 mr-2'
-        src={blog?.coverImage}
-        alt={blog?.title}
-      />
+      <Link className='w-2/5 mr-2' href={'/blog/' + blog?.slug}>
+        <Image
+          className='object-cover object-center w-full h-full'
+          width={300}
+          height={300}
+          src={blog?.coverImage}
+          alt={blog?.title}
+        />
+      </Link>
       <div className='w-3/5 space-y-3'>
-        <div>
-          <span className='text-sm font-medium text-gray-700'>
-            11 December 2022
-          </span>
-          <h2 className='text-sm font-medium'>
-            {blog?.title?.slice(0, 50)}...
-          </h2>
-        </div>
+        <Link href={'/blog/' + blog?.slug}>
+          <div>
+            <span className='text-sm font-medium text-gray-700'>
+              11 December 2022
+            </span>
+            <h2 className='text-sm font-medium'>
+              {blog?.title?.slice(0, 50)}...
+            </h2>
+          </div>
+        </Link>
         <div className='flex space-x-2 md:space-x-4'>
           <Image
             width='30'
             height='30'
-            className='w-8 h-8 rounded-full'
+            className='object-cover object-center w-8 h-8 rounded-full'
             src={blog?.author?.profilePic}
             alt={blog?.author?.firstName + ' ' + blog?.author?.lastName}
           />
