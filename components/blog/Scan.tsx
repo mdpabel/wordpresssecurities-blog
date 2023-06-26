@@ -15,7 +15,7 @@ const Scan = () => {
         <InputWrapper>
           <Label htmlFor='url'>Your site url</Label>
           <Input
-          value={url}
+            value={url}
             id='url'
             type='url'
             placeholder='https://www.wordpresssecurities.com/'
@@ -28,14 +28,14 @@ const Scan = () => {
                 cursor: url ? 'pointer' : 'not-allowed',
                 pointerEvents: url ? 'auto' : 'none',
               }}
-              className='px-10 py-2 text-white bg-black rounded '
+              className='px-4 py-2 text-white bg-black rounded md:px-10 '
               href={`https://sitecheck.sucuri.net/results/${url}`}
             >
-              Scan your site
+              Scan site
             </Link>
 
             <Link
-              className='px-10 py-2 text-white bg-gray-700 rounded '
+              className='px-4 py-2 text-white bg-gray-700 rounded md:px-10 '
               href='/'
             >
               Detected Malware?

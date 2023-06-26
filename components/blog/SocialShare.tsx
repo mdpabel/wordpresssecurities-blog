@@ -21,7 +21,7 @@ interface ISocialShare {
 
 const SocialShare = ({ url, id }: ISocialShare) => {
   return (
-    <div className='grid grid-cols-2 pb-4 space-y-4 md:grid-cols-6 md:space-y-0 md:space-x-4 '>
+    <div className='grid grid-cols-2 pb-4 space-y-4 md:grid-cols-5 md:space-y-0 md:space-x-4 '>
       <ViewCount id={id} />
       <div className='md:hidden'></div>
       <FacebookShareButton url={url}>

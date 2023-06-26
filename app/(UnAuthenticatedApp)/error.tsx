@@ -1,6 +1,7 @@
 'use client'; // Error components must be Client Components
 
 import { useEffect } from 'react';
+import ComponentWrapper  from '@/components/common/ComponentWrapper';
 
 export default function Error({
   error,
@@ -15,7 +16,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div>
+    <ComponentWrapper>
       <h2>{error.message}</h2>
       <button
         onClick={
@@ -25,6 +26,6 @@ export default function Error({
       >
         Try again
       </button>
-    </div>
+    </ComponentWrapper>
   );
 }

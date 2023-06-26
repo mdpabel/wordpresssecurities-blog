@@ -9,7 +9,6 @@ export async function getBlogs() {
       orderBy: {
         createAt: 'desc',
       },
-      take: 5,
     });
 
     return res;

@@ -8,12 +8,18 @@ import { getBlogs } from '@/utils/getBlogs';
 
 interface INewBlogs {
   blogs: BlogType[];
+  title: boolean;
 }
 
-const NewBlogs = ({ blogs }: INewBlogs) => {
+const NewBlogs = ({ blogs, title }: INewBlogs) => {
   return (
     <ComponentWrapper>
-      <div className='py-10'>
+      <div
+        style={{
+          display: title == false ? 'none' : 'block',
+        }}
+        className='py-10'
+      >
         <Title>New on blogs</Title>
       </div>
       <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'>

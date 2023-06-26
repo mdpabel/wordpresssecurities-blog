@@ -1,7 +1,8 @@
 import React from 'react';
+import ComponentWrapper from '@/components/common/ComponentWrapper';
 
 const Loading = () => {
-  return <div>Loading....</div>;
+  return <ComponentWrapper>Loading....</ComponentWrapper>;
 };
 
 export default Loading;
