@@ -9,7 +9,7 @@ const Blog = () => {
   const blogs = use(getBlogs());
 
   return (
-    <div className='space-y-5'>
+    <div className='pt-5 space-y-5'>
       <NewBlogs title={false} blogs={blogs} />
 
       <ComponentWrapper className='grid grid-cols-1 gap-8 md:grid-cols-3'>
