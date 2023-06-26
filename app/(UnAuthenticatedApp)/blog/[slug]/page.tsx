@@ -7,6 +7,7 @@ import { formateDate } from '@/utils/formateDate';
 import BlogSidebar from '@/components/blog/BlogSidebar';
 import BlogFooter from '@/components/blog/BlogFooter';
 import AboutAuthor from '@/components/blog/AboutAuthor';
+import Popular from '@/components/blog/Popular';
 
 type PostType = {
   params: { slug: string };
@@ -66,15 +67,17 @@ const Post = ({ params }: PostType) => {
             url={`https://wordpresssecurites.com/${params?.slug}`}
           />
         </div>
-        <div>
-          <AboutAuthor links={data?.author?.links} author={data?.author} />
-        </div>
         <div className='p-8 space-y-4 bg-white rounded '>
           <BlogFooter />
         </div>
+        <Popular />
       </div>
       <div>
-        <BlogSidebar postId={data.author.id} />
+        <BlogSidebar
+          links={data?.author?.links}
+          author={data?.author}
+          postId={data.author.id}
+        />
       </div>
     </ComponentWrapper>
   );

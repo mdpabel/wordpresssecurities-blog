@@ -1,13 +1,26 @@
 import HiringPromotion from './HiringPromotion';
 import SocialLinks from './SocialLinks';
 import DealAndCoupon from './AffiliatePromotion';
+import Scan from './Scan';
+import AboutAuthor from './AboutAuthor';
+import { Link, User } from '@prisma/client';
 
-const BlogSidebar = ({ postId }: { postId: string }) => {
+const BlogSidebar = ({
+  postId,
+  author,
+  links,
+}: {
+  postId: string;
+  author: User;
+  links: Link[];
+}) => {
   return (
     <div className='flex flex-col space-y-5'>
+      <Scan />
       <HiringPromotion postId={postId} />
       <SocialLinks />
       <DealAndCoupon />
+      <AboutAuthor author={author} links={links} />
     </div>
   );
 };
