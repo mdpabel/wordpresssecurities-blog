@@ -1,27 +1,23 @@
 import React, { use } from 'react';
 import ComponentWrapper from '@/components/common/ComponentWrapper';
-import BlogSidebar from '@/components/blog/BlogSidebar';
 import { getBlogs } from '@/utils/getBlogs';
 import { BigCard, SmallCard } from '@/components/common/Card';
 import { Title } from '@/components/common/Title';
-import { topPosts } from '@/utils/TakeTopPosts';
 import NewBlogs from '@/components/home/NewBlogs';
 
 const Blog = () => {
   const blogs = use(getBlogs());
 
-  console.log(blogs.length);
-
   return (
-    <ComponentWrapper>
-      <div>FILTER</div>
+    <div className='space-y-5'>
       <NewBlogs title={false} blogs={blogs} />
-      <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
+
+      <ComponentWrapper className='grid grid-cols-1 gap-8 md:grid-cols-3'>
         {blogs.slice(5).map((blog) => (
           <SmallCard blog={blog} key={blog.id} />
         ))}
-      </div>
-    </ComponentWrapper>
+      </ComponentWrapper>
+    </div>
   );
 };
 
