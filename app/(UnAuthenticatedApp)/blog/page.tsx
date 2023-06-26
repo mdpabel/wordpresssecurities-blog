@@ -5,6 +5,9 @@ import { BigCard, SmallCard } from '@/components/common/Card';
 import { Title } from '@/components/common/Title';
 import NewBlogs from '@/components/home/NewBlogs';
 
+export const dynamic = 'force-static';
+export const revalidate = 600;
+
 const Blog = () => {
   const blogs = use(getBlogs());
 
