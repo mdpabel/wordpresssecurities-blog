@@ -5,6 +5,7 @@ export default authMiddleware({
     '/',
     '/login',
     '/signup',
+    '/about-us',
     '/blog',
     '/blog/:path*',
     '/api/blog/:path*',

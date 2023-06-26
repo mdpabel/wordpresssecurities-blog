@@ -35,15 +35,27 @@ const HiringPromotion = ({ postId }: { postId: string }) => {
       <Title>I need help with …</Title>
       <div className='grid grid-cols-2 gap-5 '>
         <Wrapper href='https://mdpabel.com'>
-          <Image width={40} height={40} src='/developer.png' alt='' />
-          <p className='text-center'>Develop your site</p>
+          <Image
+            width={40}
+            height={40}
+            src='/developer.png'
+            alt='Website Development'
+          />
+          <p className='text-center'>Website Development</p>
         </Wrapper>
 
         <Wrapper
           href={`https://www.wordpresssecurities.com/` + 'users/' + postId}
         >
           <SecurityIcon />
-          <p className='text-center'>Secure your site</p>
+          <p className='text-center'>WordPress Security</p>
+        </Wrapper>
+
+        <Wrapper
+          href={`https://www.wordpresssecurities.com/` + 'users/' + postId}
+        >
+          <VirusIcon />
+          <p className='text-center'>Removed Malware/Virus</p>
         </Wrapper>
 
         <Wrapper href='https://mdpabel.com'>
@@ -56,16 +68,9 @@ const HiringPromotion = ({ postId }: { postId: string }) => {
           <p className='text-center'>Optimize site speed</p>
         </Wrapper>
 
-        <Wrapper
-          href={`https://www.wordpresssecurities.com/` + 'users/' + postId}
-        >
-          <VirusIcon />
-          <p className='text-center'>Removed Malware/Virus</p>
-        </Wrapper>
-
         <Wrapper href='https://mdpabel.com'>
           <SEOIcon />
-          <p className='text-center'>Optimize search engine</p>
+          <p className='text-center'>SEO and Digital Marketing</p>
         </Wrapper>
       </div>
     </ComponentWrapper>

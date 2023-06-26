@@ -5,6 +5,8 @@ import ComponentWrapper from '@/components/common/ComponentWrapper';
 import prisma from '@/db/mongo';
 import { formateDate } from '@/utils/formateDate';
 import BlogSidebar from '@/components/blog/BlogSidebar';
+import BlogFooter from '@/components/blog/BlogFooter';
+import AboutAuthor from '@/components/blog/AboutAuthor';
 
 type PostType = {
   params: { slug: string };
@@ -31,11 +33,8 @@ const getData = async (slug: string) => {
     },
     include: {
       author: {
-        select: {
-          firstName: true,
-          lastName: true,
+        include: {
           links: true,
-          id: true,
         },
       },
     },
@@ -53,17 +52,26 @@ const Post = ({ params }: PostType) => {
 
   return (
     <ComponentWrapper className='flex flex-col mt-10 space-y-8 md:space-x-8 md:flex-row md:space-y-0'>
-      <div className='w-full p-8 space-y-4 bg-white rounded md:w-3/4 '>
-        <h1 className='text-3xl font-bold'>{data?.title}</h1>
-        <div>Last updated on {formateDate(data?.updatedAt)}</div>
-        <div>
-          Blogger : {data?.author?.firstName + ' ' + data?.author?.lastName}
+      <div className='w-full space-y-10 md:w-3/4'>
+        <div className='p-8 space-y-4 bg-white rounded '>
+          <h1 className='text-3xl font-bold'>{data?.title}</h1>
+          <div>Last updated on {formateDate(data?.updatedAt)}</div>
+          <SocialShare
+            id={data?.id}
+            url={`https://wordpresssecurites.com/${params?.slug}`}
+          />
+          <div dangerouslySetInnerHTML={{ __html: data?.content }}></div>
+          <SocialShare
+            id={data?.id}
+            url={`https://wordpresssecurites.com/${params?.slug}`}
+          />
         </div>
-        <SocialShare
-          id={data?.id}
-          url={`https://wordpresssecurites.com/${params?.slug}`}
-        />
-        <div dangerouslySetInnerHTML={{ __html: data?.content }}></div>
+        <div>
+          <AboutAuthor links={data?.author?.links} author={data?.author} />
+        </div>
+        <div className='p-8 space-y-4 bg-white rounded '>
+          <BlogFooter />
+        </div>
       </div>
       <div>
         <BlogSidebar postId={data.author.id} />

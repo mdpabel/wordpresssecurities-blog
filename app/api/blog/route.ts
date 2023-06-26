@@ -49,7 +49,6 @@ export const POST = async (req: NextRequest) => {
     });
 
     revalidatePath('/');
-    // revalidatePath('/blog/' + newBlog?.slug);
 
     return NextResponse.json({
       success: true,

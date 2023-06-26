@@ -14,7 +14,7 @@ const Footer = () => {
         </span>
         <ul className='flex flex-wrap items-center mt-3 text-sm font-medium text-black sm:mt-0'>
           <li>
-            <Link href='/' className='mr-4 hover:underline md:mr-6 '>
+            <Link href='/about-us' className='mr-4 hover:underline md:mr-6 '>
               About us
             </Link>
           </li>
