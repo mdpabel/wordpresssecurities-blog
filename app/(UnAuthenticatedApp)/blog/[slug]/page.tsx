@@ -62,10 +62,10 @@ const Post = ({ params }: PostType) => {
             url={`https://wordpresssecurites.com/${params?.slug}`}
           />
           <div dangerouslySetInnerHTML={{ __html: data?.content }}></div>
-          <SocialShare
+          {/* <SocialShare
             id={data?.id}
             url={`https://wordpresssecurites.com/${params?.slug}`}
-          />
+          /> */}
         </div>
         <div className='p-8 space-y-4 bg-white rounded '>
           <BlogFooter />

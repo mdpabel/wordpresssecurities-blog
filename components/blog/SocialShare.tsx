@@ -35,7 +35,7 @@ const SocialShare = ({ url, id }: ISocialShare) => {
           <span>
             <Facebook />
           </span>
-          <span className='hidden md:block'>Share</span>
+          <span className='md:block'>Share</span>
         </div>
       </FacebookShareButton>
 
@@ -50,7 +50,7 @@ const SocialShare = ({ url, id }: ISocialShare) => {
           <span>
             <Twitter />
           </span>
-          <span className='hidden md:block'>Tweet</span>
+          <span className='md:block'>Tweet</span>
         </div>
       </TwitterShareButton>
 
@@ -65,7 +65,7 @@ const SocialShare = ({ url, id }: ISocialShare) => {
           <span>
             <LinkedIn />
           </span>
-          <span className='hidden md:block'>Share</span>
+          <span className='md:block'>Share</span>
         </div>
       </LinkedinShareButton>
 
@@ -80,7 +80,7 @@ const SocialShare = ({ url, id }: ISocialShare) => {
           <span>
             <MailIcon />
           </span>
-          <span className='hidden md:block'>Email</span>
+          <span className='md:block'>Email</span>
         </div>
       </EmailShareButton>
     </div>

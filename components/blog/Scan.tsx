@@ -1,16 +1,47 @@
+'use client';
 import Link from 'next/link';
-import React, { ReactNode } from 'react';
+import React, { useState } from 'react';
+import Input, { Label, InputWrapper } from '../common/Input';
 import ComponentWrapper from './ComponentWrapper';
-import { SucuriIcon } from './icons';
 import Title from './Title';
 
 const Scan = () => {
+  const [url, setUrl] = useState('');
+
   return (
     <ComponentWrapper>
       <Title>Scan your site free …</Title>
       <div className=''>
-        <SucuriIcon />
-        <p className='text-center'>Website Development</p>
+        <InputWrapper>
+          <Label htmlFor='url'>Your site url</Label>
+          <Input
+          value={url}
+            id='url'
+            type='url'
+            placeholder='https://www.wordpresssecurities.com/'
+            onChange={(e) => setUrl(e.target.value)}
+          />
+          <div className='flex justify-between pt-3'>
+            <Link
+              target='_blank'
+              style={{
+                cursor: url ? 'pointer' : 'not-allowed',
+                pointerEvents: url ? 'auto' : 'none',
+              }}
+              className='px-10 py-2 text-white bg-black rounded '
+              href={`https://sitecheck.sucuri.net/results/${url}`}
+            >
+              Scan your site
+            </Link>
+
+            <Link
+              className='px-10 py-2 text-white bg-gray-700 rounded '
+              href='/'
+            >
+              Detected Malware?
+            </Link>
+          </div>
+        </InputWrapper>
       </div>
     </ComponentWrapper>
   );
