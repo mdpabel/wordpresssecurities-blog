@@ -16,7 +16,7 @@ export default function Home() {
     <main className='flex flex-col'>
       <Hero />
       <FeaturedPosts />
-      <NewBlogs blogs={data} />
+      <NewBlogs title={true} blogs={data} />
       <FeaturedCoupons />
       <TopSecurityPlugins />
     </main>

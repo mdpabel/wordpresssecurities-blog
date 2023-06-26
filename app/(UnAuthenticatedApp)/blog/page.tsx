@@ -22,17 +22,3 @@ const Blog = () => {
 };
 
 export default Blog;
-
-{
-  /* <div className='flex space-x-10 max-h'>
-        <div className='w-full space-y-10 md:w-2/3'>
-          <BigCard blog={blogs[0]} />
-        </div>
-        <div className='w-full space-y-10 md:w-1/3'>
-          <Title>Most popular</Title>
-          {popularBlogs.map((blog) => (
-            <SmallCard key={blog.id} blog={blog} />
-          ))}
-        </div>
-      </div> */
-}
