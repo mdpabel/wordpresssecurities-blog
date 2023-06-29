@@ -52,8 +52,8 @@ const Post = ({ params }: PostType) => {
   }
 
   return (
-    <ComponentWrapper className='flex flex-col mt-10 space-y-8 md:space-x-8 md:flex-row md:space-y-0'>
-      <div className='w-full space-y-10 md:w-3/4'>
+    <ComponentWrapper className='flex flex-col mt-10 space-y-8 lg:space-x-8 lg:flex-row lg:space-y-0'>
+      <div className='w-full space-y-10 lg:w-2/3'>
         <div className='p-8 space-y-4 bg-white rounded '>
           <h1 className='text-3xl font-bold'>{data?.title}</h1>
           <div>Last updated on {formateDate(data?.updatedAt)}</div>
@@ -72,7 +72,7 @@ const Post = ({ params }: PostType) => {
         </div>
         <Popular />
       </div>
-      <div>
+      <div className='w-full lg:w-1/3'>
         <BlogSidebar
           links={data?.author?.links}
           author={data?.author}

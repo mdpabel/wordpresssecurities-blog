@@ -28,14 +28,14 @@ const Scan = () => {
                 cursor: url ? 'pointer' : 'not-allowed',
                 pointerEvents: url ? 'auto' : 'none',
               }}
-              className='px-4 py-2 text-white bg-black rounded md:px-10 '
+              className='px-2 py-2 text-white bg-black rounded md:px-4 '
               href={`https://sitecheck.sucuri.net/results/${url}`}
             >
               Scan site
             </Link>
 
             <Link
-              className='px-4 py-2 text-white bg-gray-700 rounded md:px-10 '
+              className='px-2 py-2 text-white bg-gray-700 rounded md:px-4 '
               href='/'
             >
               Detected Malware?
