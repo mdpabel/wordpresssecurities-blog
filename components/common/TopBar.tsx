@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
-import ComponentWrapper from '../common/ComponentWrapper';
-import AuthNav from './AuthNav';
+import ComponentWrapper from './ComponentWrapper';
+import AuthNav from '../home/AuthNav';
 
 const TopBar = () => {
   return (

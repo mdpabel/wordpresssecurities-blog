@@ -109,21 +109,27 @@ export const SmallCard = ({ className = '', blog }: ICard) => {
   );
 };
 
-export const HostingCard = () => {
+interface IHostingCard {
+  imgUrl: string;
+  text: string;
+  alt: string;
+}
+
+export const HostingCard = ({ imgUrl, text = '', alt }: IHostingCard) => {
   return (
     <div className='flex flex-col h-56 p-5 space-y-6 bg-white rounded shadow'>
       <div className='flex items-center space-x-4 h-1/2'>
-        <img
-          width={100}
-          height={100}
-          src='https://www.wpbeginner.com/wp-content/uploads/2014/01/sitegroudcoupon.png'
-          alt=''
+        <Image
+          className='w-28 h-28 object-fill'
+          width={250}
+          height={250}
+          src={imgUrl}
+          alt={alt}
         />
         <h2 className='text-xl font-semibold'>Siteground</h2>
       </div>
       <p className='h-1/2'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi
-        laudantium{' '}
+        {text.slice(0, 75)}{' '}
         <Link
           style={{
             color: '#FF6200',

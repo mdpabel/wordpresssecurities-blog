@@ -8,7 +8,7 @@ import {
   TwitterIcon,
 } from '@/components/common/icons';
 import Link from 'next/link';
-import ComponentWrapper from '../common/ComponentWrapper';
+import ComponentWrapper from './ComponentWrapper';
 import { SignedIn } from '@clerk/nextjs';
 
 const Navbar = () => {

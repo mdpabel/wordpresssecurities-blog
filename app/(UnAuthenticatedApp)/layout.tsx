@@ -1,5 +1,5 @@
-import Footer from '@/components/home/Footer';
-import Header from '@/components/home/Header';
+import Footer from '@/components/common/Footer';
+import Header from '@/components/common/Header';
 
 export default function UnAuthenticatedAppLayout({
   children,
