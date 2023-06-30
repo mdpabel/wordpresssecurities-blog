@@ -9,6 +9,8 @@ export default authMiddleware({
     '/blog',
     '/blog/:path*',
     '/api/blog/:path*',
+    '/hosting-reviews',
+    '/coupons',
   ],
 });
 
