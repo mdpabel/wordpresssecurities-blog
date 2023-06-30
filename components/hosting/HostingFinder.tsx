@@ -34,14 +34,14 @@ interface ISiteGround {
 const Footer = ({ images, hostings, coupons }: ISiteGround) => {
   return (
     <div className='flex flex-col items-center space-y-10'>
-      <div className='flex space-x-4'>
+      <div className='flex items-center space-x-4'>
         {images.map((image, index) => (
           <Link key={index} href='/'>
             <Image width={100} height={100} src={image} alt={hostings[index]} />
           </Link>
         ))}
       </div>
-      <div className='flex space-x-4'>
+      <div className='flex items-center space-x-4'>
         {hostings.map((hosting, index) => (
           <Link className='border px-4 py-2 rounded' href='/' key={index}>
             {hosting}
@@ -49,7 +49,7 @@ const Footer = ({ images, hostings, coupons }: ISiteGround) => {
         ))}
       </div>
 
-      <div className='flex space-x-4'>
+      <div className='flex items-center space-x-4'>
         {coupons.map((hosting, index) => (
           <Link className='border px-4 py-2 rounded' href='/' key={index}>
             {hosting}
