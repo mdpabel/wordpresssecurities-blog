@@ -17,7 +17,7 @@ const BlogSidebar = ({
   return (
     <div className='flex flex-col space-y-5'>
       <Scan />
-      <HiringPromotion postId={postId} />
+      <HiringPromotion />
       <SocialLinks />
       <DealAndCoupon />
       <AboutAuthor author={author} links={links} />

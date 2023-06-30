@@ -9,9 +9,6 @@ import { client } from '@/utils/client';
 import { useAsync } from '@/hooks/useAsync';
 import ComponentWrapper from '@/components/common/ComponentWrapper';
 import Title from '@/components/dashboard/Title';
-import { DangerToast } from '@/components/common/Toast';
-import { useUser } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,7 +19,6 @@ interface MetaFormElements extends HTMLFormControlsCollection {
 }
 
 const Dashboard = () => {
-  const router = useRouter();
   const [errors, setErrors] = useState({
     title: '',
     coverImg: '',
@@ -31,6 +27,7 @@ const Dashboard = () => {
     hasError: false,
   });
   const { data, status, run, isLoading, isSuccess, isError } = useAsync();
+  const [checkedCategories, setCheckedCategories] = useState<string[]>([]);
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   const [coverImg, setCoverImg] = useState('');
@@ -46,45 +43,14 @@ const Dashboard = () => {
       coverImg,
       metas,
       content,
+      categories: checkedCategories,
     };
-
-    let hasError = false;
-
-    if (title.length < 25) {
-      setErrors({
-        ...errors,
-        title: 'Title must be 25 or more characters',
-      });
-      hasError = true;
-    }
-    if (!coverImg) {
-      setErrors({
-        ...errors,
-        coverImg: 'Cover image is required',
-      });
-      hasError = true;
-    }
-    if (content.length < 100) {
-      setErrors({
-        ...errors,
-        content: 'Blog body must be 100 or more characters',
-      });
-      hasError = true;
-    }
-
-    if (hasError) {
-      setErrors({
-        ...errors,
-        hasError: true,
-      });
-      return;
-    }
 
     run(
       client('/api/blog', {
         method: 'POST',
         data: data,
-      })
+      }),
     );
   };
 
@@ -128,6 +94,8 @@ const Dashboard = () => {
     <ComponentWrapper className='pt-10 space-y-8 min-h-[80vh]'>
       <Title setTitle={setTitle} title={title} />
       <Editor
+        checkedCategories={checkedCategories}
+        setCheckedCategories={setCheckedCategories}
         isLoading={isLoading}
         handleSavePost={handleSavePost}
         setContent={setContent}

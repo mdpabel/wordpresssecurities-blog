@@ -6,7 +6,7 @@ import { useAsync } from '@/hooks/useAsync';
 const ViewCount = ({ id }: { id: string }) => {
   const { isLoading, isError, isSuccess, data, error, run } = useAsync();
 
-  const api = '/api/blog/' + id;
+  const api = '/api/views/' + id;
 
   useEffect(() => {
     client(api, {

@@ -11,8 +11,11 @@ import { UploadIcon } from '@/components/icons';
 import SEO from './SEO';
 import CoverImg from './CoverImg';
 import Spinner from '@/components/common/Spinner';
+import Category from './Category';
 
 interface IEditor {
+  setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  checkedCategories: string[];
   handleSavePost: () => void;
   setContent: (v) => void;
   content: string;
@@ -41,6 +44,8 @@ const Editor = ({
   setCoverImg,
   metas,
   setMetas,
+  setCheckedCategories,
+  checkedCategories,
   isLoading,
 }: IEditor) => {
   const quillRef = useRef();
@@ -127,7 +132,7 @@ const Editor = ({
         highlight: (text) => hljs.highlightAuto(text).value,
       },
     }),
-    []
+    [],
   );
 
   return (
@@ -139,6 +144,10 @@ const Editor = ({
         value={content}
         onChange={handleEditorChange}
         modules={modules}
+      />
+      <Category
+        checkedCategories={checkedCategories}
+        setCheckedCategories={setCheckedCategories}
       />
       <div className='flex flex-col space-x-8 space-y-8 md:justify-between md:flex-row md:items-center'>
         <SEO metas={metas} setMetas={setMetas} />

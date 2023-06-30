@@ -58,6 +58,8 @@ model Post {
   metaKeywords    String?
   metaTitle       String?
 
+  categories String[]
+
   author   User   @relation(fields: [authorId], references: [id])
   authorId String @db.ObjectId
   View     View?

@@ -29,7 +29,7 @@ const Wrapper = ({ children, href }: IWrapper) => (
   </Link>
 );
 
-const HiringPromotion = ({ postId }: { postId: string }) => {
+const HiringPromotion = () => {
   return (
     <ComponentWrapper>
       <Title>I need help with …</Title>
@@ -44,16 +44,12 @@ const HiringPromotion = ({ postId }: { postId: string }) => {
           <p className='text-center'>Website Development</p>
         </Wrapper>
 
-        <Wrapper
-          href={`https://www.wordpresssecurities.com/` + 'users/' + postId}
-        >
+        <Wrapper href={`https://www.wordpresssecurities.com/`}>
           <SecurityIcon />
           <p className='text-center'>WordPress Security</p>
         </Wrapper>
 
-        <Wrapper
-          href={`https://www.wordpresssecurities.com/` + 'users/' + postId}
-        >
+        <Wrapper href={`https://www.wordpresssecurities.com/`}>
           <VirusIcon />
           <p className='text-center'>Removed Malware/Virus</p>
         </Wrapper>

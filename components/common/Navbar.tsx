@@ -46,7 +46,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link prefetch className='text-lg font-medium' href='/'>
+              <Link
+                prefetch
+                className='text-lg font-medium'
+                href='/hosting-reviews'
+              >
                 Hosting Reviews
               </Link>
             </li>
@@ -130,7 +134,7 @@ const Navbar = () => {
             <li onClick={() => setOpen(false)} className='border-b'>
               <Link
                 prefetch
-                href='/contact'
+                href='/hosting-reviews'
                 className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
               >
                 Hosting Reviews

@@ -7,6 +7,7 @@ import ResponsiveImage from './ResponsiveImage';
 interface ICard {
   className?: string;
   blog: BlogType;
+  hasBody?: boolean;
 }
 
 export const BigCard = ({ className = '', blog }: ICard) => {
@@ -31,7 +32,8 @@ export const BigCard = ({ className = '', blog }: ICard) => {
                 11 December 2022
               </span>
               <h2 className='text-lg font-semibold tracking-wide'>
-                {blog?.title?.slice(0, 45)}...
+                {blog?.title?.slice(0, 45)}{' '}
+                {blog?.title.length > 45 ? '...' : ''}
               </h2>
               <p className='text-sm tracking-wide'>
                 {blog?.metaDescription?.slice(0, 100)}
@@ -62,7 +64,23 @@ export const BigCard = ({ className = '', blog }: ICard) => {
   );
 };
 
-export const SmallCard = ({ className = '', blog }: ICard) => {
+interface ISmallCard {
+  className?: string;
+  blog: BlogType;
+  hasBody?: boolean;
+  title?: number;
+  body?: number;
+  titleClass?: string;
+}
+
+export const SmallCard = ({
+  className = '',
+  blog,
+  hasBody,
+  title = 50,
+  body = 100,
+  titleClass = '',
+}: ISmallCard) => {
   return (
     <div
       className={`flex px-3 md:px-2 py-4 bg-white rounded shadow ` + className}
@@ -82,9 +100,15 @@ export const SmallCard = ({ className = '', blog }: ICard) => {
             <span className='text-sm font-medium text-gray-700'>
               11 December 2022
             </span>
-            <h2 className='text-sm font-medium'>
-              {blog?.title?.slice(0, 50)}...
+            <h2 className={`text-sm font-medium ` + titleClass}>
+              {blog?.title?.slice(0, title)}{' '}
+              {blog?.title.length > title ? '...' : ''}
             </h2>
+            {hasBody && (
+              <p className='text-sm tracking-wide'>
+                {blog?.metaDescription?.slice(0, body)}...
+              </p>
+            )}
           </div>
         </Link>
         <div className='flex space-x-2 md:space-x-4'>
@@ -112,10 +136,16 @@ export const SmallCard = ({ className = '', blog }: ICard) => {
 interface IHostingCard {
   imgUrl: string;
   text: string;
+  title: string;
   alt: string;
 }
 
-export const HostingCard = ({ imgUrl, text = '', alt }: IHostingCard) => {
+export const HostingCard = ({
+  imgUrl,
+  text = '',
+  alt,
+  title,
+}: IHostingCard) => {
   return (
     <div className='flex flex-col h-56 p-5 space-y-6 bg-white rounded shadow'>
       <div className='flex items-center space-x-4 h-1/2'>
@@ -126,7 +156,7 @@ export const HostingCard = ({ imgUrl, text = '', alt }: IHostingCard) => {
           src={imgUrl}
           alt={alt}
         />
-        <h2 className='text-xl font-semibold'>Siteground</h2>
+        <h2 className='text-xl font-semibold'>{title}</h2>
       </div>
       <p className='h-1/2'>
         {text.slice(0, 75)}{' '}
