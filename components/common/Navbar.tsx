@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import ComponentWrapper from './ComponentWrapper';
 import { SignedIn } from '@clerk/nextjs';
+import AuthNav from '../home/AuthNav';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -54,11 +55,7 @@ const Navbar = () => {
                 Hosting Reviews
               </Link>
             </li>
-            <li>
-              <Link prefetch className='text-lg font-medium' href='/'>
-                Vulnerabilities
-              </Link>
-            </li>
+
             <li>
               <Link prefetch className='text-lg font-medium' href='/coupons'>
                 Coupons
@@ -66,7 +63,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link prefetch className='text-lg font-medium' href='/'>
-                Security Providers
+                Vulnerabilities
               </Link>
             </li>
             <SignedIn>
@@ -119,7 +116,7 @@ const Navbar = () => {
           style={{
             display: open ? 'block' : 'none',
           }}
-          className='block w-full md:hidden'
+          className='block w-full md:hidden shadow'
         >
           <ul className='md:w-[90%] mx-auto  lg:px-0 absolute right-0 z-50 flex flex-col w-full px-4 mt-4 bg-gray-100 rounded-lg lg:hidden top-10'>
             <li onClick={() => setOpen(false)} className='border-b'>
@@ -140,15 +137,7 @@ const Navbar = () => {
                 Hosting Reviews
               </Link>
             </li>
-            <li onClick={() => setOpen(false)} className='border-b'>
-              <Link
-                prefetch
-                href='/contact'
-                className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
-              >
-                Vulnerabilities
-              </Link>
-            </li>
+
             <li onClick={() => setOpen(false)} className='border-b'>
               <Link
                 prefetch
@@ -164,7 +153,7 @@ const Navbar = () => {
                 href='/contact'
                 className='block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 '
               >
-                Security Providers
+                Vulnerabilities
               </Link>
             </li>
             <SignedIn>
@@ -178,6 +167,13 @@ const Navbar = () => {
                 </Link>
               </li>
             </SignedIn>
+
+            <div
+              onClick={() => setOpen(false)}
+              className='block py-2 pl-3 pr-4 text-gray-700 mb-10 rounded hover:bg-gray-100 border-b'
+            >
+              <AuthNav />
+            </div>
           </ul>
         </div>
       </ComponentWrapper>

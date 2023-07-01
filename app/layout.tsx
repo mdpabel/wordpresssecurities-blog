@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html suppressHydrationWarning={true} lang='en'>
-        <body suppressHydrationWarning={true} className={playfair.className}>
+        <body className={playfair.className}>
           <main className=''>{children}</main>
         </body>
       </html>

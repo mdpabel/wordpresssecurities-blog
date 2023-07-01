@@ -179,4 +179,68 @@ export const HostingCard = ({
   );
 };
 
-// 73
+export const Hosting = ({
+  className = '',
+  blog,
+  hasBody,
+  title = 50,
+  body = 100,
+  titleClass = '',
+}: ISmallCard) => {
+  return (
+    <div
+      className={`flex px-3 md:px-2 py-4 bg-white rounded shadow ` + className}
+    >
+      <Link className='w-2/5 mr-2' href={'/blog/' + blog?.slug}>
+        <Image
+          className='object-cover object-center w-full h-full'
+          width={300}
+          height={300}
+          src={blog?.coverImage}
+          alt={blog?.title}
+        />
+      </Link>
+      <div className='w-3/5 space-y-3'>
+        <Link href={'/blog/' + blog?.slug}>
+          <div>
+            <span className='text-sm font-medium text-gray-700'>
+              11 December 2022
+            </span>
+            <h2 className={`text-sm font-medium ` + titleClass}>
+              {blog?.title?.slice(0, title)}{' '}
+              {blog?.title.length > title ? '...' : ''}
+            </h2>
+            {hasBody && (
+              <>
+                <p className='hidden md:block text-sm tracking-wide'>
+                  {blog?.metaDescription?.slice(0, body)}...
+                </p>
+
+                <p className='md:hidden block text-sm tracking-wide'>
+                  {blog?.metaDescription?.slice(0, body * 0.7)}...
+                </p>
+              </>
+            )}
+          </div>
+        </Link>
+        <div className='flex space-x-2 md:space-x-4'>
+          <Image
+            width='30'
+            height='30'
+            className='object-cover object-center w-8 h-8 rounded-full'
+            src={blog?.author?.profilePic}
+            alt={blog?.author?.firstName + ' ' + blog?.author?.lastName}
+          />
+          <div>
+            <h4 className='text-xs font-semibold'>
+              {blog?.author?.firstName + ' ' + blog?.author?.lastName}
+            </h4>
+            <h6 className='text-xs text-gray-700'>
+              {blog?.author?.occupation}
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
