@@ -6,7 +6,7 @@ import { Title } from '@/components/common/Title';
 import NewBlogs from '@/components/home/NewBlogs';
 
 export const dynamic = 'force-static';
-export const revalidate = 600;
+export const revalidate = 86400;
 
 const Blog = () => {
   const blogs = use(getBlogs());

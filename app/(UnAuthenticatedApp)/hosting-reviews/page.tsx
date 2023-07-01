@@ -7,6 +7,9 @@ import HostingFinder from '@/components/hosting/HostingFinder';
 import prisma from '@/db/mongo';
 import React, { use } from 'react';
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 const getData = async () => {
   const res = await prisma.post.findMany({
     where: {
