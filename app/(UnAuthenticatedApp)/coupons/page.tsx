@@ -4,6 +4,9 @@ import Sidebar from '@/components/coupons/Sidebar';
 import prisma from '@/db/mongo';
 import React, { use } from 'react';
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 const getData = async () => {
   const res = await prisma.coupon.findMany();
 
