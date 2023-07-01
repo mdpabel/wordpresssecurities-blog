@@ -1,7 +1,7 @@
 import DealAndCoupon from '@/components/blog/AffiliatePromotion';
 import HiringPromotion from '@/components/blog/HiringPromotion';
 import Scan from '@/components/blog/Scan';
-import { HostingCard, SmallCard } from '@/components/common/Card';
+import { BigCard, HostingCard, SmallCard } from '@/components/common/Card';
 import ComponentWrapper from '@/components/common/ComponentWrapper';
 import HostingFinder from '@/components/hosting/HostingFinder';
 import prisma from '@/db/mongo';
@@ -32,24 +32,31 @@ const page = () => {
   const data = use(getData());
 
   return (
-    <ComponentWrapper className='flex md:flex-row flex-col pt-10 space-x-8'>
-      <div className='w-2/3 space-y-8'>
+    <ComponentWrapper className='flex md:flex-row flex-col pt-10 space-y-8 md:space-y-0 md:space-x-8'>
+      <div className='w-full md:w-2/3 space-y-8'>
         <HostingFinder />
         <div className='space-y-8'>
           {data.map((hosting) => (
-            <SmallCard
-              hasBody={true}
-              className='max-h-[220px] p-8 space-x-8'
-              blog={hosting}
-              key={hosting.id}
-              title={70}
-              body={200}
-              titleClass='font-semibold text-base py-4'
-            />
+            <>
+              <div className='hidden md:block '>
+                <SmallCard
+                  hasBody={true}
+                  className='md:max-h-[220px] p-8 space-x-8'
+                  blog={hosting}
+                  key={hosting.id}
+                  title={70}
+                  body={150}
+                  titleClass='font-semibold text-base py-4'
+                />
+              </div>
+              <div className='block md:hidden'>
+                <BigCard blog={hosting} key={hosting.id} />
+              </div>
+            </>
           ))}
         </div>
       </div>
-      <div className='w-1/3 space-y-8'>
+      <div className='w-full md:w-1/3 space-y-8'>
         <HiringPromotion />
 
         <DealAndCoupon />

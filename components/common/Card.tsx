@@ -105,9 +105,15 @@ export const SmallCard = ({
               {blog?.title.length > title ? '...' : ''}
             </h2>
             {hasBody && (
-              <p className='text-sm tracking-wide'>
-                {blog?.metaDescription?.slice(0, body)}...
-              </p>
+              <>
+                <p className='hidden md:block text-sm tracking-wide'>
+                  {blog?.metaDescription?.slice(0, body)}...
+                </p>
+
+                <p className='md:hidden block text-sm tracking-wide'>
+                  {blog?.metaDescription?.slice(0, body * 0.7)}...
+                </p>
+              </>
             )}
           </div>
         </Link>
