@@ -75,3 +75,17 @@ model View {
   post   Post   @relation(fields: [postId], references: [id])
   postId String @unique @db.ObjectId
 }
+
+model Coupon {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  categories  String[]
+  name        String
+  discount    Int
+  description String
+  details     String?
+  reviews     String?
+  link        String
+}

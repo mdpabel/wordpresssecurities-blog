@@ -18,8 +18,13 @@ const sidebarLinks = [
     allowed: ['ADMIN', 'GUEST', 'READER'],
   },
   {
-    label: 'AI 🔥',
-    link: 'ai',
+    label: 'Add New Coupon',
+    link: 'add-new-coupon',
+    allowed: ['ADMIN', 'GUEST', 'READER'],
+  },
+  {
+    label: 'All coupons',
+    link: 'all-coupons',
     allowed: ['ADMIN', 'GUEST', 'READER'],
   },
   {

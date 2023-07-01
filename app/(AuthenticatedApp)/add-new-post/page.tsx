@@ -66,14 +66,14 @@ const Dashboard = () => {
         progress: undefined,
         theme: 'dark',
       });
-      // setContent('');
-      // setTitle('');
-      // setCoverImg('');
-      // setMetas({
-      //   title: '',
-      //   description: '',
-      //   keywords: '',
-      // });
+      setContent('');
+      setTitle('');
+      setCoverImg('');
+      setMetas({
+        title: '',
+        description: '',
+        keywords: '',
+      });
     }
 
     if (isError && data) {

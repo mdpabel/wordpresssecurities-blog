@@ -10,7 +10,7 @@ interface IItem {
 
 const Item = ({ id, value, label, handleChecked }: IItem) => {
   return (
-    <li className='w-full border-b border-gray-200 sm:border-b-0 sm:border-r '>
+    <li className='w-36 border border-gray-200 sm:border-b-0 sm:border-r '>
       <div className='flex items-center pl-3'>
         <input
           onChange={(e) => handleChecked(value, e.target.checked)}
@@ -30,35 +30,23 @@ const Item = ({ id, value, label, handleChecked }: IItem) => {
   );
 };
 
-const categories = [
-  {
-    id: 'blog',
-    value: 'blog',
-    label: 'Blog',
-  },
-  {
-    id: 'hosting_review',
-    value: 'hosting_review',
-    label: 'Hosting Review',
-  },
-  {
-    id: 'coupons',
-    value: 'coupons',
-    label: 'Coupons',
-  },
-  {
-    id: 'vulnerabilities',
-    value: 'vulnerabilities',
-    label: 'vulnerabilities',
-  },
-];
+type Categories = {
+  id: string;
+  value: string;
+  label: string;
+}[];
 
 interface ICategory {
   setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
   checkedCategories: string[];
+  categories: Categories;
 }
 
-const Category = ({ setCheckedCategories, checkedCategories }: ICategory) => {
+const Category = ({
+  setCheckedCategories,
+  checkedCategories,
+  categories,
+}: ICategory) => {
   const handleChecked = (value: string, checked: boolean) => {
     if (checked) {
       setCheckedCategories([...checkedCategories, value]);
@@ -71,8 +59,8 @@ const Category = ({ setCheckedCategories, checkedCategories }: ICategory) => {
 
   return (
     <div className='pt-8'>
-      <h3 className='mb-4 font-semibold text-gray-900 '>Technology</h3>
-      <ul className='items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex '>
+      <h3 className='mb-4 font-semibold text-gray-900 '>Select categories</h3>
+      <ul className='items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg flex flex-wrap'>
         {categories.map(({ id, value, label }) => (
           <Item
             id={id}

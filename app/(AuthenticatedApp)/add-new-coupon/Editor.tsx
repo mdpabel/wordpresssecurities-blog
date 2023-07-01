@@ -6,70 +6,84 @@ import hljs from 'highlight.js';
 import 'react-quill/dist/quill.snow.css';
 // import 'highlight.js/styles/darcula.css';
 import 'highlight.js/styles/default.css';
-import Button from '@/components/common/Button';
-import { UploadIcon } from '@/components/icons';
-import SEO from './SEO';
-import CoverImg from './CoverImg';
-import Spinner from '@/components/common/Spinner';
-import Category from './Category';
+import Category from '@/components/dashboard/Category';
 
 interface IEditor {
   setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
   checkedCategories: string[];
-  handleSavePost: () => void;
   setContent: (v) => void;
   content: string;
-  setCoverImg: React.Dispatch<React.SetStateAction<string>>;
-  coverImg: string;
-  isLoading: boolean;
-  metas: {
-    title: string;
-    description: string;
-    keywords: string;
-  };
-  setMetas: React.Dispatch<
-    React.SetStateAction<{
-      title: string;
-      description: string;
-      keywords: string;
-    }>
-  >;
 }
 
 const categories = [
   {
-    id: 'blog',
-    value: 'blog',
-    label: 'Blog',
+    id: 'Domain',
+    value: 'Domain',
+    label: 'Domain',
   },
   {
-    id: 'hosting_review',
-    value: 'hosting_review',
-    label: 'Hosting Review',
+    id: 'Hosting',
+    value: 'Hosting',
+    label: 'Hosting',
   },
   {
-    id: 'coupons',
-    value: 'coupons',
-    label: 'Coupons',
+    id: 'SSL',
+    value: 'SSL',
+    label: 'SSL',
   },
   {
-    id: 'vulnerabilities',
-    value: 'vulnerabilities',
-    label: 'vulnerabilities',
+    id: 'VPN',
+    value: 'VPN',
+    label: 'VPN',
+  },
+
+  {
+    id: 'Namecheap',
+    value: 'Namecheap',
+    label: 'Namecheap',
+  },
+  {
+    id: 'Hostinger',
+    value: 'Hostinger',
+    label: 'Hostinger',
+  },
+
+  {
+    id: 'Bluehost',
+    value: 'Bluehost',
+    label: 'Bluehost',
+  },
+
+  {
+    id: 'Siteground',
+    value: 'Siteground',
+    label: 'Siteground',
+  },
+
+  {
+    id: 'Godaddy',
+    value: 'Godaddy',
+    label: 'Godaddy',
+  },
+
+  {
+    id: 'Hostgator',
+    value: 'Hostgator',
+    label: 'Hostgator',
+  },
+
+  {
+    id: 'Digital ocean',
+    value: 'Digital ocean',
+    label: 'Digital ocean',
   },
 ];
 
 const Editor = ({
-  handleSavePost,
   setContent,
   content,
-  coverImg,
-  setCoverImg,
-  metas,
-  setMetas,
   setCheckedCategories,
   checkedCategories,
-  isLoading,
 }: IEditor) => {
   const quillRef = useRef();
   const imageHandler = async () => {
@@ -173,13 +187,6 @@ const Editor = ({
         checkedCategories={checkedCategories}
         setCheckedCategories={setCheckedCategories}
       />
-      <div className='flex flex-col space-x-8 space-y-8 md:justify-between md:flex-row md:items-center'>
-        <SEO metas={metas} setMetas={setMetas} />
-        <CoverImg setCoverImg={setCoverImg} coverImg={coverImg} />
-      </div>
-      <Button className='flex' onClick={handleSavePost}>
-        Save post {isLoading ? <Spinner /> : null}
-      </Button>
     </div>
   );
 };
