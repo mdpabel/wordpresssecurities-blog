@@ -16,6 +16,49 @@ type PostType = {
 export const dynamicParams = true;
 export const dynamic = 'force-static';
 
+export const generateMetadata = async ({ params }: PostType) => {
+  const post = await prisma.post.findFirst({
+    where: {
+      slug: params.slug,
+    },
+    include: {
+      author: {
+        select: {
+          firstName: true,
+          lastName: true,
+        },
+      },
+    },
+  });
+  if (!post) {
+    return {
+      title: 'Not found',
+      description: "The page doesn't exist",
+    };
+  }
+
+  console.log(post);
+
+  return {
+    title: post.metaTitle || post.title,
+    description: post.metaDescription || post.content,
+    keywords: post.metaKeywords || post.title.split(' ').join(),
+    robots: 'index, follow',
+    authors: [
+      {
+        name: post.author.firstName + ' ' + post.author.lastName,
+        url: 'https://www.wordpresssecurities.com/',
+      },
+    ],
+    category: 'Technology',
+    applicationName: 'WordPress Securities',
+    creator: 'WordPressSecurities Editorial Team',
+    viewport: 'width=device-width, initial-scale=1.0',
+    classification: 'WordPress Security Blog',
+    generator: 'next.js',
+  };
+};
+
 export async function generateStaticParams() {
   const posts = await prisma.post.findMany();
 

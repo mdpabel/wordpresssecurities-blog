@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   category: 'Technology',
   abstract:
     'WordPress Securites provides valuable information and resources to help you enhance the security of your WordPress website. Stay up-to-date with the latest security best practices, learn about vulnerabilities, and safeguard your site against cyber threats.',
-  applicationName: 'WordPress Securites',
+  applicationName: 'WordPress Securities',
   creator: 'MD Pabel',
   publisher: 'MD Pabel',
   verification: {
