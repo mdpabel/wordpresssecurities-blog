@@ -10,32 +10,32 @@ const sidebarLinks = [
   {
     label: 'Add new post',
     link: 'add-new-post',
-    allowed: ['ADMIN', 'GUEST', 'READER'],
+    allowed: ['ADMIN', 'GUEST'],
   },
   {
     label: 'All posts',
     link: 'all-posts',
-    allowed: ['ADMIN', 'GUEST', 'READER'],
+    allowed: ['ADMIN', 'GUEST'],
   },
   {
     label: 'Add New Coupon',
     link: 'add-new-coupon',
-    allowed: ['ADMIN', 'GUEST', 'READER'],
+    allowed: ['ADMIN'],
   },
   {
     label: 'All coupons',
     link: 'all-coupons',
-    allowed: ['ADMIN', 'GUEST', 'READER'],
+    allowed: ['ADMIN'],
   },
   {
     label: 'Profile',
     link: 'profile',
-    allowed: ['ADMIN', 'GUEST', 'READER'],
+    allowed: ['ADMIN', 'GUEST'],
   },
   {
     label: 'Settings',
     link: 'settings',
-    allowed: ['ADMIN', 'GUEST', 'READER'],
+    allowed: ['ADMIN', 'GUEST'],
   },
 ];
 

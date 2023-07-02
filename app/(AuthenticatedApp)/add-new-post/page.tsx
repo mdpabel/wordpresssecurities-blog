@@ -92,6 +92,7 @@ const Dashboard = () => {
 
   return (
     <ComponentWrapper className='pt-10 space-y-8 min-h-[80vh]'>
+      <h1 className='text-2xl text-center'>Add new post</h1>
       <Title setTitle={setTitle} title={title} />
       <Editor
         checkedCategories={checkedCategories}

@@ -77,6 +77,7 @@ const Page = () => {
 
   return (
     <ComponentWrapper className='pt-10 space-y-8 min-h-[80vh] pb-10'>
+      <h1 className='text-2xl text-center'>Add new coupon</h1>
       <ToastContainer
         position='top-right'
         autoClose={5000}
@@ -100,7 +101,7 @@ const Page = () => {
         <Input
           type='string'
           onChange={(e) => setLink(e.target.value)}
-          value={companyName}
+          value={link}
           required
           placeholder='Link'
         />
