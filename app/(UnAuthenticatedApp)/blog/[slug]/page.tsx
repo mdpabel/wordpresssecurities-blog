@@ -37,8 +37,6 @@ export const generateMetadata = async ({ params }: PostType) => {
     };
   }
 
-  console.log(post);
-
   return {
     title: post.metaTitle || post.title,
     description: post.metaDescription || post.content,
