@@ -1,8 +1,6 @@
 import prisma from '@/db/mongo';
 import { ImageResponse } from 'next/server';
 
-export const runtime = 'edge';
-
 export const alt = 'About Acme';
 export const size = {
   width: 1200,
@@ -11,11 +9,7 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: { slug: string } }) {
-  const post = await prisma.post.findFirst({
-    where: {
-      slug: params.slug,
-    },
-  });
+  const post = await fetch(`blog/${params.slug}`).then((res) => res.json());
 
   return new ImageResponse(
     (
