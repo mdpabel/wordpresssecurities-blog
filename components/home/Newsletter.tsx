@@ -37,7 +37,6 @@ import { EmailIcon } from '@/components/common/icons';
 const Newsletter = () => {
   const handleNewsletterSubmission = (e: FormEvent) => {
     e.preventDefault();
-    console.log('TEST');
   };
 
   return (

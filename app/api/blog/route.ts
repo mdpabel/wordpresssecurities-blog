@@ -60,7 +60,6 @@ export const POST = async (req: NextRequest) => {
       data: newBlog,
     });
   } catch (error) {
-    console.log('/api/blog');
     console.log(error);
     return NextResponse.json({
       success: false,
