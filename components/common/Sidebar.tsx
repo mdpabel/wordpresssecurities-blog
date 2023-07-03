@@ -8,6 +8,11 @@ import { SignOutButton } from '@clerk/nextjs';
 
 const sidebarLinks = [
   {
+    label: 'Dashboard',
+    link: 'dashboard',
+    allowed: ['ADMIN', 'GUEST'],
+  },
+  {
     label: 'Add new post',
     link: 'add-new-post',
     allowed: ['ADMIN', 'GUEST'],

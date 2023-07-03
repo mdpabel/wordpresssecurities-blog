@@ -1,4 +1,5 @@
 import Sidebar from '@/components/common/Sidebar';
+import { PostContextProvider } from '@/context/blogContext';
 
 export default function AuthenticatedAppLayout({
   children,
@@ -11,7 +12,9 @@ export default function AuthenticatedAppLayout({
         <aside>
           <Sidebar />
         </aside>
-        <section className='w-full'>{children}</section>
+        <PostContextProvider>
+          <section className='w-full'>{children}</section>
+        </PostContextProvider>
       </div>
     </>
   );

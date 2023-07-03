@@ -8,7 +8,39 @@ import { NextRequest, NextResponse } from 'next/server';
 import sanitizeHtml from 'sanitize-html';
 
 export const GET = async (req: NextRequest) => {
-  return NextResponse.json({});
+  const user = (await getCurrentUser()) as User;
+
+  const posts = await prisma.post.findMany({
+    where: {
+      authorId: user.id,
+    },
+    include: {
+      author: true,
+      View: true,
+    },
+  });
+
+  if (!posts) {
+    return NextResponse.json(
+      {
+        success: true,
+        data: posts,
+      },
+      {
+        status: 404,
+      },
+    );
+  }
+
+  return NextResponse.json(
+    {
+      success: true,
+      data: posts,
+    },
+    {
+      status: 200,
+    },
+  );
 };
 
 const categories = ['blog', 'hosting_review', 'coupons', 'vulnerabilities'];

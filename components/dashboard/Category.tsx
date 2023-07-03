@@ -6,13 +6,15 @@ interface IItem {
   value: string;
   label: string;
   handleChecked: (value: string, checked: boolean) => void;
+  checked: boolean;
 }
 
-const Item = ({ id, value, label, handleChecked }: IItem) => {
+const Item = ({ id, value, label, handleChecked, checked }: IItem) => {
   return (
     <li className='w-36 border border-gray-200 sm:border-b-0 sm:border-r '>
       <div className='flex items-center pl-3'>
         <input
+          checked={checked}
           onChange={(e) => handleChecked(value, e.target.checked)}
           id={id}
           type='checkbox'
@@ -67,6 +69,7 @@ const Category = ({
             value={value}
             label={label}
             key={id}
+            checked={checkedCategories.includes(value)}
             handleChecked={handleChecked}
           />
         ))}

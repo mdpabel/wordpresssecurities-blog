@@ -13,7 +13,7 @@ const AuthNav = () => {
       </SignedOut>
       <SignedIn>
         <li className='cursor-pointer'>
-          <Link href='/profile'>
+          <Link href='/dashboard'>
             {user?.user?.firstName ? 'Hello ' + user?.user?.firstName : 'Hello'}
           </Link>
         </li>

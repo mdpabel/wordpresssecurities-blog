@@ -1,4 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
+
 import prisma from '@/db/mongo';
+import { Post } from '@prisma/client';
 import { ImageResponse } from 'next/server';
 
 export const alt = 'About Acme';
@@ -9,7 +12,9 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: { slug: string } }) {
-  const post = await fetch(`blog/${params.slug}`).then((res) => res.json());
+  const post: Post = await fetch(`blog/${params.slug}`).then((res) =>
+    res.json(),
+  );
 
   return new ImageResponse(
     (
@@ -24,7 +29,8 @@ export default async function Image({ params }: { params: { slug: string } }) {
           justifyContent: 'center',
         }}
       >
-        {post?.title}
+        <img src={post?.coverImage} alt={post?.title} />
+        <h2>{post?.title}</h2>
       </div>
     ),
     {

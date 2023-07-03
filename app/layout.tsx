@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   viewport: 'width=device-width, initial-scale=1.0',
   classification: 'WordPress Security Blog',
   generator: 'next.js',
+  metadataBase: new URL('https://www.wordpresssecurities.com'),
 };
 
 export default function RootLayout({
