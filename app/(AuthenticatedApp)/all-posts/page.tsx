@@ -65,7 +65,12 @@ const columns = [
   }),
   columnHelper.accessor('edit', {
     cell: (info) => (
-      <Link href={`/update-post?id=${info.row.original.id}`}>Edit</Link>
+      <Link
+        className='underline'
+        href={`/update-post?id=${info.row.original.id}`}
+      >
+        Edit
+      </Link>
     ),
     header: () => <div className='flex items-center cursor-pointer'>Edit</div>,
   }),
@@ -93,112 +98,120 @@ const AllPosts = () => {
   });
 
   return (
-    <ComponentWrapper className='relative space-y-5 overflow-x-auto sm:rounded-lg min-h-[80vh] pt-10'>
+    <ComponentWrapper className='pt-10'>
       <h1 className='text-2xl text-center mb-10'>Manage your posts</h1>
       <Input
         placeholder='Search...'
         value={globalFilter ?? ''}
         onChange={(e) => setGlobalFilter(e.target.value)}
       />
-      <table className='w-full text-sm text-left text-gray-500 '>
-        <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th
-                  onClick={header.column.getToggleSortingHandler()}
-                  scope='col'
-                  className='px-6 py-3 space-x-2'
-                  key={header.id}
-                >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
-                  {{
-                    asc: <div>🔼</div>,
-                    desc: <div>🔽</div>,
-                  }[header.column.getIsSorted() as string] ?? null}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr className='bg-white border-b' key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td className='px-6 py-4' key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className='h-2' />
-      <div className='flex items-center gap-2'>
-        <button
-          className='border rounded p-1'
-          onClick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {'<<'}
-        </button>
-        <button
-          className='border rounded p-1'
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {'<'}
-        </button>
-        <button
-          className='border rounded p-1'
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {'>'}
-        </button>
-        <button
-          className='border rounded p-1'
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}
-        >
-          {'>>'}
-        </button>
-        <span className='flex items-center gap-1'>
-          <div>Page</div>
-          <strong>
-            {table.getState().pagination.pageIndex + 1} of{' '}
-            {table.getPageCount()}
-          </strong>
-        </span>
-        <span className='flex items-center gap-1'>
-          | Go to page:
-          <input
-            type='number'
-            defaultValue={table.getState().pagination.pageIndex + 1}
+      <div className='relative space-y-5 overflow-x-auto sm:rounded-lg min-h-[80vh] pt-10'>
+        <table className='w-full text-sm text-left text-gray-500 '>
+          <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th
+                    onClick={header.column.getToggleSortingHandler()}
+                    scope='col'
+                    className='px-6 py-3 space-x-2'
+                    key={header.id}
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+                    {{
+                      asc: <div>🔼</div>,
+                      desc: <div>🔽</div>,
+                    }[header.column.getIsSorted() as string] ?? null}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr className='bg-white border-b' key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td className='px-6 py-4' key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className='h-2' />
+
+        <div className='flex items-center gap-2'>
+          <button
+            className='border rounded p-1'
+            onClick={() => table.setPageIndex(0)}
+            disabled={!table.getCanPreviousPage()}
+          >
+            {'<<'}
+          </button>
+          <button
+            className='border rounded p-1'
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            {'<'}
+          </button>
+          <button
+            className='border rounded p-1'
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            {'>'}
+          </button>
+          <button
+            className='border rounded p-1'
+            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+            disabled={!table.getCanNextPage()}
+          >
+            {'>>'}
+          </button>
+
+          <span className='flex items-center gap-1'>
+            | Go to page:
+            <input
+              type='number'
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                table.setPageIndex(page);
+              }}
+              className='border p-1 rounded w-16'
+            />
+          </span>
+        </div>
+        <div className='flex space-x-4'>
+          <div>{table.getPrePaginationRowModel().rows.length} Rows</div>
+          <div>|</div>
+          <span className='flex items-center gap-1'>
+            <div>Page</div>
+            <strong>
+              {table.getState().pagination.pageIndex + 1} of{' '}
+              {table.getPageCount()}
+            </strong>
+          </span>
+          <div>|</div>
+          <select
+            value={table.getState().pagination.pageSize}
             onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              table.setPageIndex(page);
+              table.setPageSize(Number(e.target.value));
             }}
-            className='border p-1 rounded w-16'
-          />
-        </span>
-        <select
-          value={table.getState().pagination.pageSize}
-          onChange={(e) => {
-            table.setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
+          >
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
-      <div>{table.getPrePaginationRowModel().rows.length} Rows</div>
     </ComponentWrapper>
   );
 };

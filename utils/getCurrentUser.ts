@@ -11,14 +11,14 @@ export const getCurrentUser = cache(async () => {
     },
   });
 
-  if (!res) {
+  if (!res || !res?.id) {
     return NextResponse.json(
       {
         success: false,
       },
       {
         status: 401,
-      }
+      },
     );
   }
 

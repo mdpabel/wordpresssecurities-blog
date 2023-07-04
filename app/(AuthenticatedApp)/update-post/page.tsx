@@ -36,13 +36,10 @@ const Dashboard = () => {
     description: '',
     keywords: '',
   });
+  const id = searchParams.get('id') ?? '';
 
   useEffect(() => {
-    const id = searchParams.get('id') ?? '';
-
     const post = getPostById(id, data);
-
-    console.log(post);
 
     setContent(post?.content ?? '');
     setTitle(post?.title ?? '');
@@ -53,7 +50,7 @@ const Dashboard = () => {
       keywords: post?.metaKeywords ?? '',
     });
     setCoverImg(post?.coverImage ?? '');
-  }, [data, searchParams]);
+  }, [data, id]);
 
   const handleSavePost = () => {
     const data = {
@@ -65,8 +62,8 @@ const Dashboard = () => {
     };
 
     run(
-      client('/api/blog', {
-        method: 'POST',
+      client(`/api/blog?id=${id}`, {
+        method: 'PUT',
         data: data,
       }),
     );
@@ -110,7 +107,7 @@ const Dashboard = () => {
 
   return (
     <ComponentWrapper className='pt-10 space-y-8 min-h-[80vh]'>
-      <h1 className='text-2xl text-center'>Add new post</h1>
+      <h1 className='text-2xl text-center'>Update post</h1>
       <Title setTitle={setTitle} title={title} />
       <Editor
         checkedCategories={checkedCategories}

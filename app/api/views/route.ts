@@ -33,7 +33,7 @@ export const POST = async (req: NextRequest, context: any) => {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 

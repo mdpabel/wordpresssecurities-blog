@@ -2,8 +2,8 @@ import prisma from '@/db/mongo';
 import cloudinary from '@/utils/cloudinaryConfig';
 import { generateSlug } from '@/utils/generateSlug';
 import { getCurrentUser } from '@/utils/getCurrentUser';
+import { revalidatePaths } from '@/utils/revalidatePaths';
 import { User } from '@prisma/client';
-import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import sanitizeHtml from 'sanitize-html';
 
@@ -84,7 +84,7 @@ export const POST = async (req: NextRequest) => {
       },
     });
 
-    revalidatePath('/');
+    revalidatePaths(newBlog);
 
     return NextResponse.json({
       success: true,
@@ -99,5 +99,95 @@ export const POST = async (req: NextRequest) => {
 
       data: null,
     });
+  }
+};
+
+export const PUT = async (req: NextRequest, context: any) => {
+  try {
+    const user = (await getCurrentUser()) as User;
+    const body: {
+      title: string;
+      coverImg: string;
+      categories: string[];
+      metas: {
+        title: string;
+        description: string;
+        keywords: string;
+      };
+      content: string;
+    } = await req.json();
+    const url = new URL(req.url);
+    const searchParams = new URLSearchParams(url.search);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Post id is missing',
+          data: null,
+        },
+        {
+          status: 500,
+        },
+      );
+    }
+
+    const post = await prisma.post.findFirst({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!post) {
+      return NextResponse.json({
+        success: false,
+        message: 'Post not found',
+        data: null,
+      });
+    }
+
+    if (!user || !user.id || user.id !== post?.authorId) {
+      return NextResponse.json({
+        status: false,
+        message: 'You do not have permission to edit/update this post',
+      });
+    }
+
+    const updatedPost = await prisma.post.update({
+      where: {
+        id: post.id,
+      },
+      data: {
+        coverImage: body?.coverImg,
+        content: sanitizeHtml(body.content),
+        title: sanitizeHtml(body.title),
+        metaDescription: sanitizeHtml(body.metas.description),
+        metaKeywords: sanitizeHtml(body.metas.keywords),
+        metaTitle: sanitizeHtml(body.metas.title),
+        slug: generateSlug(sanitizeHtml(body.title)),
+        categories: body.categories.length > 0 ? body.categories : ['blog'],
+      },
+    });
+
+    revalidatePaths(updatedPost);
+
+    return NextResponse.json({
+      success: true,
+      message: 'Successfully updated post',
+      data: updatedPost,
+    });
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'Something went wrong',
+      },
+      {
+        status: 500,
+      },
+    );
   }
 };
