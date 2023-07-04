@@ -16,9 +16,10 @@ import {
 import Input from '@/components/common/Input';
 import Link from 'next/link';
 import { usePost } from '@/context/blogContext';
+import Image from 'next/image';
 
 type Post = {
-  id: string;
+  coverImage: string;
   title: string;
   author: string;
   categories: string;
@@ -30,9 +31,11 @@ type Post = {
 const columnHelper = createColumnHelper<Post>();
 
 const columns = [
-  columnHelper.accessor('id', {
-    cell: (info) => info.getValue(),
-    header: () => <div className='flex items-center cursor-pointer'>ID</div>,
+  columnHelper.accessor('coverImage', {
+    cell: (info) => (
+      <Image width={100} height={100} src={info.getValue()} alt='cover image' />
+    ),
+    header: () => <div className='flex items-center cursor-pointer'>Image</div>,
   }),
   columnHelper.accessor('title', {
     cell: (info) => info.getValue(),
