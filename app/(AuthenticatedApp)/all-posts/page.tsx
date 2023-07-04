@@ -19,6 +19,7 @@ import { usePost } from '@/context/blogContext';
 import Image from 'next/image';
 
 type Post = {
+  id: string;
   coverImage: string;
   title: string;
   author: string;
