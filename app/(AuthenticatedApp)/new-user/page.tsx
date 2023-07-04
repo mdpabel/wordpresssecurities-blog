@@ -39,7 +39,7 @@ const NewUser = () => {
         links,
         occupation: story,
         profilePic: image,
-      })
+      }),
     );
   };
 
@@ -131,7 +131,7 @@ const NewUser = () => {
             placeholder="I'm..."
           />
         </InputWrapper>
-        <Button onClick={saveProfile} className='mt-8'>
+        <Button onClick={saveProfile} className='mt-8 flex space-x-3'>
           Save profile {isLoading ? <Spinner /> : ''}
         </Button>
       </div>

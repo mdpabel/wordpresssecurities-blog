@@ -1,24 +1,23 @@
 import { useState, useEffect } from 'react';
-import { User } from '@prisma/client';
+import { Link, User } from '@prisma/client';
 
-type Data = {
-  success: boolean;
-  data: User;
+type Data = User & {
+  links: Link[];
 };
 
 export const useUserByClerkId = () => {
-  const [data, setData] = useState<User>();
+  const [data, setData] = useState<Data>();
 
   useEffect(() => {
     fetch('/api/profile')
       .then((res) => {
         return res.json();
       })
-      .then((data: Data) => {
-        const user = data?.data as User;
+      .then((data: any) => {
+        const user = data?.data as Data;
         setData(user);
       });
-  });
+  }, []);
 
   return data;
 };

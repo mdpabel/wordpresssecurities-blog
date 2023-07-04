@@ -1,11 +1,19 @@
 import prisma from '@/db/mongo';
 import cloudinary from '@/utils/cloudinaryConfig';
-import { getCurrentUser } from '@/utils/getCurrentUser';
 import { currentUser } from '@clerk/nextjs';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async () => {
-  const res = await getCurrentUser();
+  const user = await currentUser();
+  const res = await prisma.user.findFirst({
+    where: {
+      clerkUserId: user?.id,
+    },
+    include: {
+      links: true,
+    },
+  });
+
   return NextResponse.json({
     success: true,
     data: res,
@@ -28,7 +36,7 @@ export const POST = async (req: NextRequest) => {
       },
       {
         status: 401,
-      }
+      },
     );
   }
 
@@ -67,6 +75,6 @@ export const POST = async (req: NextRequest) => {
     },
     {
       status: 201,
-    }
+    },
   );
 };
