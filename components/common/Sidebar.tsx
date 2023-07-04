@@ -101,7 +101,7 @@ function Sidebar() {
           <div className='flex items-center justify-between'>
             <Link
               onClick={() => setToggleSidebar(!toggleSidebar)}
-              href='/dashboard'
+              href='/'
               className='text-2xl font-semibold'
             >
               WPSecurities
