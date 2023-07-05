@@ -177,7 +177,7 @@ const Editor = ({
         <SEO metas={metas} setMetas={setMetas} />
         <CoverImg setCoverImg={setCoverImg} coverImg={coverImg} />
       </div>
-      <Button className='flex' onClick={handleSavePost}>
+      <Button className='flex space-x-3' onClick={handleSavePost}>
         Save post {isLoading ? <Spinner /> : null}
       </Button>
     </div>

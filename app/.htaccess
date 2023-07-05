@@ -1,0 +1,2 @@
+RewriteCond %{HTTP_HOST} ^www\.wordpresssecurities\.com [NC]
+RewriteRule (.*) https://wordpresssecurities.com/$1 [R=301,L]

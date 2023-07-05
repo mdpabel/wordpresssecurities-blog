@@ -37,6 +37,29 @@ const Dashboard = () => {
     keywords: '',
   });
 
+  useEffect(() => {
+    setContent(window.localStorage.getItem('content') ?? '');
+    setTitle(window.localStorage.getItem('title') ?? '');
+    setCoverImg(window.localStorage.getItem('coverImg') ?? '');
+    setMetas(
+      JSON.parse(
+        window.localStorage.getItem('metas') ??
+          JSON.stringify({
+            title: '',
+            description: '',
+            keywords: '',
+          }),
+      ),
+    );
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('content', content);
+    window.localStorage.setItem('title', title);
+    window.localStorage.setItem('coverImg', coverImg);
+    window.localStorage.setItem('metas', JSON.stringify(metas));
+  }, [content, coverImg, metas, title]);
+
   const handleSavePost = () => {
     const data = {
       title,
@@ -74,6 +97,11 @@ const Dashboard = () => {
         description: '',
         keywords: '',
       });
+
+      window.localStorage.removeItem('content');
+      window.localStorage.removeItem('title');
+      window.localStorage.removeItem('coverImg');
+      window.localStorage.removeItem('metas');
     }
 
     if (isError && data) {
