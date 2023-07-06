@@ -104,7 +104,7 @@ function Sidebar() {
               href='/'
               className='text-2xl font-semibold'
             >
-              WPSecurities
+              WPSecurities.
             </Link>
             <div
               onClick={() => setToggleSidebar(true)}
@@ -179,7 +179,7 @@ function Sidebar() {
         >
           <div>
             <Link href='/' className='text-2xl font-semibold'>
-              WPSecurities
+              WPSecurities.
             </Link>
             <div className='pt-8'>
               {sidebarLinks.map(({ label, link, allowed }, index) => {
