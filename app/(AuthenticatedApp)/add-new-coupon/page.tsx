@@ -12,6 +12,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { client } from '@/utils/client';
 import { ToastContainer, toast } from 'react-toastify';
 import Spinner from '@/components/common/Spinner';
+import withAuth from '@/components/common/withAuth';
 // import Editor from './Editor';
 const Editor = dynamic(() => import('./Editor'), {
   ssr: false,
@@ -144,4 +145,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default withAuth(Page);

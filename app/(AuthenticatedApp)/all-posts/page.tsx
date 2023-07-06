@@ -17,6 +17,7 @@ import Input from '@/components/common/Input';
 import Link from 'next/link';
 import { usePost } from '@/context/blogContext';
 import Image from 'next/image';
+import withAuth from '@/components/common/withAuth';
 
 type Post = {
   id: string;
@@ -220,4 +221,4 @@ const AllPosts = () => {
   );
 };
 
-export default AllPosts;
+export default withAuth(AllPosts);

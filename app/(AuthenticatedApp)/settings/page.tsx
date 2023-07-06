@@ -13,6 +13,7 @@ import Spinner from '@/components/common/Spinner';
 import { useRouter } from 'next/navigation';
 import { useUserByClerkId } from '@/hooks/useUserByClerkId';
 import { Link } from '@prisma/client';
+import withAuth from '@/components/common/withAuth';
 
 const NewUser = () => {
   const { data } = useUserByClerkId();
@@ -157,4 +158,4 @@ const NewUser = () => {
   );
 };
 
-export default NewUser;
+export default withAuth(NewUser);

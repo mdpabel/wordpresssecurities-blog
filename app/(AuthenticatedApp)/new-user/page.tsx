@@ -12,6 +12,7 @@ import { useAsync } from '@/hooks/useAsync';
 import Spinner from '@/components/common/Spinner';
 import { useRouter } from 'next/navigation';
 import { useUserByClerkId } from '@/hooks/useUserByClerkId';
+import withAuth from '@/components/common/withAuth';
 
 const NewUser = () => {
   const { data: storedUser, isLoaded } = useUserByClerkId();
@@ -147,4 +148,4 @@ const NewUser = () => {
   );
 };
 
-export default NewUser;
+export default withAuth(NewUser);

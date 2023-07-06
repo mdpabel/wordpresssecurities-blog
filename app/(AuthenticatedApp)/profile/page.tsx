@@ -1,4 +1,5 @@
 import ComponentWrapper from '@/components/common/ComponentWrapper';
+import withAuth from '@/components/common/withAuth';
 import { UserProfile } from '@clerk/nextjs';
 
 const UserProfilePage = () => (
@@ -7,4 +8,4 @@ const UserProfilePage = () => (
   </ComponentWrapper>
 );
 
-export default UserProfilePage;
+export default withAuth(UserProfilePage);

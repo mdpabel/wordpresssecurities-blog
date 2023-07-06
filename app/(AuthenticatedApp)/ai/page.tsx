@@ -1,7 +1,8 @@
+import withAuth from '@/components/common/withAuth';
 import React from 'react';
 
-const Dashboard = () => {
+const AI = () => {
   return <div>AI</div>;
 };
 
-export default Dashboard;
+export default withAuth(AI);

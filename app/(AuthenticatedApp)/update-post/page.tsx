@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { usePost } from '@/context/blogContext';
 import { useSearchParams } from 'next/navigation';
+import withAuth from '@/components/common/withAuth';
 
 interface MetaFormElements extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -137,4 +138,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withAuth(Dashboard);
