@@ -15,7 +15,7 @@ import { useUserByClerkId } from '@/hooks/useUserByClerkId';
 import { Link } from '@prisma/client';
 
 const NewUser = () => {
-  const data = useUserByClerkId();
+  const { data } = useUserByClerkId();
   const router = useRouter();
   const user = useUser();
   const { run, isSuccess, isLoading, isError, error } = useAsync();

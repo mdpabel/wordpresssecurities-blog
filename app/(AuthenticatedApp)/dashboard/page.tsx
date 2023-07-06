@@ -2,6 +2,7 @@
 import React from 'react';
 import useSWR from 'swr';
 import { usePost } from '@/context/blogContext';
+import withAuth from '@/components/common/withAuth';
 
 const Dashboard = () => {
   const data = usePost();
@@ -11,4 +12,4 @@ const Dashboard = () => {
   return <div>Dashboard</div>;
 };
 
-export default Dashboard;
+export default withAuth(Dashboard);

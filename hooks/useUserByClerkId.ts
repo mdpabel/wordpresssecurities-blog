@@ -1,23 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, cache } from 'react';
 import { Link, User } from '@prisma/client';
+import useSWR from 'swr';
 
 type Data = User & {
   links: Link[];
 };
 
-export const useUserByClerkId = () => {
-  const [data, setData] = useState<Data>();
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  useEffect(() => {
-    fetch('/api/profile')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data: any) => {
-        const user = data?.data as Data;
-        setData(user);
-      });
-  }, []);
+export const useUserByClerkId = cache(() => {
+  const { data, isLoading } = useSWR('/api/profile', fetcher);
 
-  return data;
-};
+  return { isLoaded: isLoading === false, data: data?.data as Data };
+});

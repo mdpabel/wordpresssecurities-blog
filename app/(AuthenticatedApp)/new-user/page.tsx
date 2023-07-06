@@ -30,7 +30,7 @@ const NewUser = () => {
     if (isSuccess) {
       router.replace('/dashboard');
     }
-  }, [isSuccess, router]);
+  }, [isSuccess]);
 
   const saveProfile = () => {
     run(

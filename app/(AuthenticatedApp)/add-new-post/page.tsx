@@ -11,6 +11,9 @@ import ComponentWrapper from '@/components/common/ComponentWrapper';
 import Title from '@/components/dashboard/Title';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useUserByClerkId } from '@/hooks/useUserByClerkId';
+import { useNewUser } from '@/hooks/useNewUser';
+import withAuth from '@/components/common/withAuth';
 
 interface MetaFormElements extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -150,4 +153,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withAuth(Dashboard);
