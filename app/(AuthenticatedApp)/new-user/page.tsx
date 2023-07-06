@@ -11,8 +11,10 @@ import { createNewUser } from '@/utils/user';
 import { useAsync } from '@/hooks/useAsync';
 import Spinner from '@/components/common/Spinner';
 import { useRouter } from 'next/navigation';
+import { useUserByClerkId } from '@/hooks/useUserByClerkId';
 
 const NewUser = () => {
+  const { data: storedUser, isLoaded } = useUserByClerkId();
   const router = useRouter();
   const user = useUser();
   const { run, isSuccess, isLoading, isError, data, error } = useAsync();
@@ -27,10 +29,16 @@ const NewUser = () => {
   ]);
 
   useEffect(() => {
+    if (storedUser) {
+      router.replace('/dashboard');
+    }
+  }, [router, storedUser]);
+
+  useEffect(() => {
     if (isSuccess) {
       router.replace('/dashboard');
     }
-  }, [isSuccess]);
+  }, [isSuccess, router]);
 
   const saveProfile = () => {
     run(
