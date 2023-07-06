@@ -1,3 +1,4 @@
+'use client';
 import withAuth from '@/components/common/withAuth';
 import React from 'react';
 
