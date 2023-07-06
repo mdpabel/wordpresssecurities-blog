@@ -131,6 +131,8 @@ const Editor = ({
     setContent(value);
   };
 
+  console.log(content);
+
   const modules = useMemo(
     () => ({
       toolbar: {
