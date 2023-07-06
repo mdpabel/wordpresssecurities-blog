@@ -16,15 +16,6 @@ export default authMiddleware({
     '/api/views/:path*',
     '/coupons',
   ],
-  async afterAuth(auth, req, evt) {
-    if (!auth.userId && !auth.isPublicRoute) {
-      return NextResponse.redirect('/login');
-    }
-    // const user = await getCurrentUser();
-
-    if (auth.userId && !auth.isPublicRoute) {
-    }
-  },
 });
 
 export const config = {

@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import { useUserByClerkId } from '@/hooks/useUserByClerkId';
+import Loader from './Loader';
 
 function withAuth<T extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<T>,
 ) {
   const WithAuthComponent = (props: T) => {
-    const { data: user, isLoaded } = useUserByClerkId();
+    const { data: user, isLoaded, isLoading } = useUserByClerkId();
 
     useEffect(() => {
       if (isLoaded && !user) {
@@ -16,7 +17,8 @@ function withAuth<T extends JSX.IntrinsicAttributes>(
 
     return (
       <>
-        <Component {...props} />
+        {isLoading ? <Loader /> : null}
+        {isLoaded ? <Component {...props} /> : null}
       </>
     );
   };

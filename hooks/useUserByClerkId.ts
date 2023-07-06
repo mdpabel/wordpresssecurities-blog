@@ -13,5 +13,5 @@ export const useUserByClerkId = () => {
 
   console.log('data ', data);
 
-  return { isLoaded: isLoading === false, data: data?.data as Data };
+  return { isLoading, isLoaded: isLoading === false, data: data?.data as Data };
 };

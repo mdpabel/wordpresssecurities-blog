@@ -1,7 +1,9 @@
 import React from 'react';
+import ComponentWrapper from '@/components/common/ComponentWrapper';
+import Loader from '@/components/common/Loader';
 
-const loading = () => {
-  return <div>loading...</div>;
+const Loading = () => {
+  return <Loader />;
 };
 
-export default loading;
+export default Loading;
