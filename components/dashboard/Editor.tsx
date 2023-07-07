@@ -8,6 +8,7 @@ import CoverImg from './CoverImg';
 import Spinner from '@/components/common/Spinner';
 import Category from './Category';
 import Button from '@/components/common/Button';
+import upload from '../../uploading.gif';
 
 interface IEditor {
   setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
@@ -68,7 +69,10 @@ const Editor = ({
   isLoading,
 }: IEditor) => {
   const { quill, quillRef, Quill } = useQuill({
-    modules: { blotFormatter: {} },
+    modules: {
+      blotFormatter: {},
+      magicUrl: true,
+    },
     placeholder: 'Write something...',
   });
 
@@ -87,6 +91,7 @@ const Editor = ({
         return;
       }
       quill?.insertEmbed(range.index, 'image', url);
+      quill?.setSelection(range?.index + 1, 1);
     },
     [quill],
   );
@@ -115,6 +120,16 @@ const Editor = ({
       const formData = new FormData();
       formData.append('image', file);
 
+      // placeholder image
+      const range = quill?.getSelection();
+      insertToEditor(
+        'https://res.cloudinary.com/divg4kqqk/image/upload/v1688755486/uploading_nyjqtx.gif',
+      );
+      if (!range) {
+        console.log('ERROR on dashboard/EDITOR.jsx ', range);
+        return;
+      }
+
       try {
         const response = await fetch('/api/upload', {
           method: 'POST',
@@ -127,12 +142,14 @@ const Editor = ({
           return;
         }
         const imageUrl = data?.secure_url;
+        quill?.deleteText(range?.index, 1);
+        quill?.setSelection(range?.index + 1, 1);
         insertToEditor(imageUrl);
       } catch (error) {
         console.error('Image upload failed', error);
       }
     };
-  }, [insertToEditor]);
+  }, [insertToEditor, quill]);
 
   useEffect(() => {
     if (quill) {
@@ -144,8 +161,8 @@ const Editor = ({
   }, [quill, quillRef, selectLocalImage]);
 
   return (
-    <div className='space-y-8'>
-      <div className='h-72'>
+    <div className='space-y-8 editorImg'>
+      <div className='h-80 '>
         <div ref={quillRef} />
       </div>
 
