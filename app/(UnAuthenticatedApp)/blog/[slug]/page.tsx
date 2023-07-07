@@ -104,7 +104,10 @@ const Post = ({ params }: PostType) => {
             id={data?.id}
             url={`https://wordpresssecurites.com/${params?.slug}`}
           />
-          <div dangerouslySetInnerHTML={{ __html: data?.content }}></div>
+          <div
+            className='view ql-editor'
+            dangerouslySetInnerHTML={{ __html: data?.content }}
+          ></div>
           {/* <SocialShare
             id={data?.id}
             url={`https://wordpresssecurites.com/${params?.slug}`}
