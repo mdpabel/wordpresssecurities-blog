@@ -97,7 +97,7 @@ const Post = ({ params }: PostType) => {
   return (
     <ComponentWrapper className='flex flex-col mt-10 space-y-8 lg:space-x-8 lg:flex-row lg:space-y-0'>
       <div className='w-full space-y-10 lg:w-2/3'>
-        <div className='p-8 space-y-4 bg-white rounded '>
+        <div className='p-2 md:p-8 space-y-4 bg-white rounded '>
           <h1 className='text-3xl font-bold'>{data?.title}</h1>
           <div>Last updated on {formateDate(data?.updatedAt)}</div>
           <SocialShare
@@ -113,7 +113,7 @@ const Post = ({ params }: PostType) => {
             url={`https://wordpresssecurites.com/${params?.slug}`}
           /> */}
         </div>
-        <div className='p-8 space-y-4 bg-white rounded '>
+        <div className='p-2 md:p-8 space-y-4 bg-white rounded '>
           <BlogFooter />
         </div>
         <Popular />
