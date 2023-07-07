@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import 'react-quill/dist/quill.core.css';
 import { Playfair_Display } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Metadata } from 'next';
