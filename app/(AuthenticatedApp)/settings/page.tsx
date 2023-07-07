@@ -45,11 +45,11 @@ const NewUser = () => {
     );
   }, [data]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      router.replace('/dashboard');
-    }
-  }, [isSuccess, router]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     router.replace('/dashboard');
+  //   }
+  // }, [isSuccess]);
 
   const saveProfile = () => {
     run(

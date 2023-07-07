@@ -39,7 +39,8 @@ const NewUser = () => {
     if (isSuccess) {
       router.replace('/dashboard');
     }
-  }, [isSuccess, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   const saveProfile = () => {
     run(
