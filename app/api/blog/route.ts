@@ -176,14 +176,16 @@ export const PUT = async (req: NextRequest, context: any) => {
       },
       data: {
         coverImage: body?.coverImg,
-        content: sanitizeHtml(body.content, {
-          allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
-          allowedAttributes: {
-            ...sanitizeHtml.defaults.allowedAttributes,
-            img: ['src'],
-          },
-          allowedSchemes: ['data', 'http', 'https'],
-        }),
+        content:
+          body.content ||
+          sanitizeHtml(body.content, {
+            allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+            allowedAttributes: {
+              ...sanitizeHtml.defaults.allowedAttributes,
+              img: ['src'],
+            },
+            allowedSchemes: ['data', 'http', 'https'],
+          }),
         title: sanitizeHtml(body.title),
         metaDescription: sanitizeHtml(body.metas.description),
         metaKeywords: sanitizeHtml(body.metas.keywords),
