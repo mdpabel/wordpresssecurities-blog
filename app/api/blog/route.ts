@@ -178,7 +178,10 @@ export const PUT = async (req: NextRequest, context: any) => {
         coverImage: body?.coverImg,
         content: sanitizeHtml(body.content, {
           allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
-          allowedAttributes: { img: ['src'] },
+          allowedAttributes: {
+            ...sanitizeHtml.defaults.allowedAttributes,
+            img: ['src'],
+          },
           allowedSchemes: ['data', 'http', 'https'],
         }),
         title: sanitizeHtml(body.title),
