@@ -1,3 +1,4 @@
+'use client';
 import { useEffect } from 'react';
 import { useUserByClerkId } from './useUserByClerkId';
 import { redirect } from 'next/navigation';

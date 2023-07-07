@@ -5,9 +5,9 @@ import { usePost } from '@/context/blogContext';
 import withAuth from '@/components/common/withAuth';
 
 const Dashboard = () => {
-  const data = usePost();
+  // const data = usePost();
 
-  console.log(data);
+  // console.log(data);
 
   return <div>Dashboard</div>;
 };

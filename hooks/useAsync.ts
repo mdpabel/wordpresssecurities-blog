@@ -1,4 +1,6 @@
 // @ts-nocheck
+'use client';
+
 import { useState, useCallback } from 'react';
 
 type StatusTypes = 'IDLE' | 'PENDING' | 'ERROR' | 'SUCCESS';
@@ -12,7 +14,7 @@ export const useAsync = <T>() => {
     setStatus('PENDING');
     if (!promise || !promise.then) {
       throw new Error(
-        `The argument passed to useAsync().run must be a promise.`
+        `The argument passed to useAsync().run must be a promise.`,
       );
     }
 
@@ -32,14 +34,14 @@ export const useAsync = <T>() => {
     (val) => {
       setData(val);
     },
-    [setData]
+    [setData],
   );
 
   const setErrorMessage = useCallback(
     (error) => {
       setError(error);
     },
-    [setError]
+    [setError],
   );
 
   return {

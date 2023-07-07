@@ -10,6 +10,18 @@ import sanitizeHtml from 'sanitize-html';
 export const GET = async (req: NextRequest) => {
   const user = (await getCurrentUser()) as User;
 
+  if (!user) {
+    return NextResponse.json(
+      {
+        success: false,
+        data: [],
+      },
+      {
+        status: 404,
+      },
+    );
+  }
+
   const posts = await prisma.post.findMany({
     where: {
       authorId: user.id,
