@@ -1,7 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
-const Editor = dynamic(() => import('@/components/dashboard/Editor'), {
+const Editor = dynamic(() => import('@/components/dashboard/Editor-old'), {
   ssr: false,
 });
 // import Editor from '@/components/dashboard/Editor';

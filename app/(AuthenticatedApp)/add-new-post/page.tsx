@@ -1,10 +1,10 @@
 'use client';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
-// const Editor = dynamic(() => import('@/components/dashboard/Editor'), {
-//   ssr: false,
-// });
-import Editor from '@/components/dashboard/Editor';
+const Editor = dynamic(() => import('@/components/dashboard/Editor'), {
+  ssr: false,
+});
+// import Editor from '@/components/dashboard/Editor';
 import { client } from '@/utils/client';
 import { useAsync } from '@/hooks/useAsync';
 import ComponentWrapper from '@/components/common/ComponentWrapper';
@@ -137,6 +137,7 @@ const Dashboard = () => {
         metas={metas}
         setMetas={setMetas}
       />
+      {/* <Editor /> */}
       <ToastContainer
         position='top-right'
         autoClose={5000}
