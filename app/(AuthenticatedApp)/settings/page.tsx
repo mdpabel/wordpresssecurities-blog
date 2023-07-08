@@ -30,8 +30,6 @@ const NewUser = () => {
     },
   ]);
 
-  console.log(data);
-
   useEffect(() => {
     if (!data) return;
     setImage(data?.profilePic);

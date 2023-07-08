@@ -74,37 +74,15 @@ const categories = [
 interface IEditor {
   setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
   checkedCategories: string[];
-  handleSavePost: () => void;
   setContent: (v: any) => void;
   content: string;
-  setCoverImg: React.Dispatch<React.SetStateAction<string>>;
-  coverImg: string;
-  isLoading: boolean;
-  metas: {
-    title: string;
-    description: string;
-    keywords: string;
-  };
-  setMetas: React.Dispatch<
-    React.SetStateAction<{
-      title: string;
-      description: string;
-      keywords: string;
-    }>
-  >;
 }
 
 const Editor = ({
-  handleSavePost,
   setContent,
   content,
-  coverImg,
-  setCoverImg,
-  metas,
-  setMetas,
   setCheckedCategories,
   checkedCategories,
-  isLoading,
 }: IEditor) => {
   const { quill, quillRef, Quill } = useQuill({
     modules: {
@@ -113,6 +91,12 @@ const Editor = ({
     },
     placeholder: 'Write something...',
   });
+
+  useEffect(() => {
+    if (quill) {
+      quill.clipboard.dangerouslyPasteHTML(content ?? '');
+    }
+  }, [content, quill]);
 
   if (Quill && !quill) {
     Quill.register('modules/blotFormatter', BlotFormatter);
@@ -193,10 +177,10 @@ const Editor = ({
     if (quill) {
       quill.getModule('toolbar').addHandler('image', selectLocalImage);
       quill.on('text-change', (delta, oldDelta, source) => {
-        console.log(quill.root.innerHTML);
+        setContent(quill.root.innerHTML);
       });
     }
-  }, [quill, quillRef, selectLocalImage]);
+  }, [quill, selectLocalImage, setContent]);
 
   return (
     <div className='space-y-8 editorImg'>
@@ -209,10 +193,6 @@ const Editor = ({
         checkedCategories={checkedCategories}
         setCheckedCategories={setCheckedCategories}
       />
-
-      <Button className='flex space-x-3' onClick={handleSavePost}>
-        Save post {isLoading ? <Spinner /> : null}
-      </Button>
     </div>
   );
 };

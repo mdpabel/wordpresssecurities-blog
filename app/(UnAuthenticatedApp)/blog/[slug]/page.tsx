@@ -92,8 +92,6 @@ const Post = ({ params }: PostType) => {
     return notFound();
   }
 
-  console.log(data);
-
   return (
     <ComponentWrapper className='flex flex-col mt-10 space-y-8 lg:space-x-8 lg:flex-row lg:space-y-0'>
       <div className='w-full space-y-10 lg:w-2/3'>

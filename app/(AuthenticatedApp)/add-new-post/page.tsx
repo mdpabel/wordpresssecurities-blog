@@ -21,7 +21,7 @@ interface MetaFormElements extends HTMLFormControlsCollection {
   keywords: HTMLInputElement;
 }
 
-const Dashboard = () => {
+const AddNewPost = () => {
   const [errors, setErrors] = useState({
     title: '',
     coverImg: '',
@@ -154,4 +154,4 @@ const Dashboard = () => {
   );
 };
 
-export default withAuth(Dashboard);
+export default withAuth(AddNewPost);

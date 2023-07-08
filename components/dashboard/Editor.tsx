@@ -76,6 +76,12 @@ const Editor = ({
     placeholder: 'Write something...',
   });
 
+  useEffect(() => {
+    if (quill) {
+      quill.clipboard.dangerouslyPasteHTML(content ?? '');
+    }
+  }, [content, quill]);
+
   if (Quill && !quill) {
     Quill.register('modules/blotFormatter', BlotFormatter);
     const MagicUrl = require('quill-magic-url').default; // Install with 'yarn add quill-magic-url'
@@ -155,10 +161,10 @@ const Editor = ({
     if (quill) {
       quill.getModule('toolbar').addHandler('image', selectLocalImage);
       quill.on('text-change', (delta, oldDelta, source) => {
-        console.log(quill.root.innerHTML);
+        setContent(quill.root.innerHTML);
       });
     }
-  }, [quill, quillRef, selectLocalImage]);
+  }, [quill, selectLocalImage, setContent]);
 
   return (
     <div className='space-y-8 editorImg'>
