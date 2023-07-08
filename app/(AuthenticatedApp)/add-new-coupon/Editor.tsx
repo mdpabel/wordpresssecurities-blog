@@ -1,20 +1,12 @@
-// @ts-nocheck
 'use client';
-import React, { useState, useMemo, useRef } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
-import hljs from 'highlight.js';
-import 'react-quill/dist/quill.snow.css';
-// import 'highlight.js/styles/darcula.css';
-import 'highlight.js/styles/default.css';
+import { useEffect, useCallback } from 'react';
+import { useQuill } from 'react-quilljs';
+import BlotFormatter from 'quill-blot-formatter';
+import 'quill/dist/quill.snow.css';
+import Spinner from '@/components/common/Spinner';
+import Button from '@/components/common/Button';
+import upload from '../../uploading.gif';
 import Category from '@/components/dashboard/Category';
-
-interface IEditor {
-  setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
-  checkedCategories: string[];
-  setContent: (v) => void;
-  content: string;
-}
-
 const categories = [
   {
     id: 'Domain',
@@ -79,27 +71,78 @@ const categories = [
   },
 ];
 
+interface IEditor {
+  setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  checkedCategories: string[];
+  handleSavePost: () => void;
+  setContent: (v: any) => void;
+  content: string;
+  setCoverImg: React.Dispatch<React.SetStateAction<string>>;
+  coverImg: string;
+  isLoading: boolean;
+  metas: {
+    title: string;
+    description: string;
+    keywords: string;
+  };
+  setMetas: React.Dispatch<
+    React.SetStateAction<{
+      title: string;
+      description: string;
+      keywords: string;
+    }>
+  >;
+}
+
 const Editor = ({
+  handleSavePost,
   setContent,
   content,
+  coverImg,
+  setCoverImg,
+  metas,
+  setMetas,
   setCheckedCategories,
   checkedCategories,
+  isLoading,
 }: IEditor) => {
-  const quillRef = useRef();
-  const imageHandler = async () => {
-    const editor = quillRef.current?.getEditor();
+  const { quill, quillRef, Quill } = useQuill({
+    modules: {
+      blotFormatter: {},
+      magicUrl: true,
+    },
+    placeholder: 'Write something...',
+  });
 
-    if (!editor) {
-      console.log('Editor instance not found');
-      return;
-    }
+  if (Quill && !quill) {
+    Quill.register('modules/blotFormatter', BlotFormatter);
+    const MagicUrl = require('quill-magic-url').default; // Install with 'yarn add quill-magic-url'
+    Quill.register('modules/magicUrl', MagicUrl);
+  }
 
+  // Insert Image(selected by user) to quill
+  const insertToEditor = useCallback(
+    (url: string) => {
+      const range = quill?.getSelection();
+      if (!range) {
+        console.log('ERROR on dashboard/EDITOR.jsx ', range);
+        return;
+      }
+      quill?.insertEmbed(range.index, 'image', url);
+      quill?.setSelection(range?.index + 1, 1);
+    },
+    [quill],
+  );
+
+  // Open Dialog to select Image File
+  const selectLocalImage = useCallback(() => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
     input.click();
 
     input.onchange = async () => {
+      // @ts-ignore
       const file = input?.files[0];
 
       if (!file) {
@@ -115,78 +158,61 @@ const Editor = ({
       const formData = new FormData();
       formData.append('image', file);
 
-      const range = editor.getSelection(true);
-      editor.insertEmbed(range.index, 'image', `/images/placeholder.png`);
-      editor.setSelection(range.index + 1);
+      // placeholder image
+      const range = quill?.getSelection();
+      insertToEditor(
+        'https://res.cloudinary.com/divg4kqqk/image/upload/v1688755486/uploading_nyjqtx.gif',
+      );
+      if (!range) {
+        console.log('ERROR on dashboard/EDITOR.jsx ', range);
+        return;
+      }
 
       try {
         const response = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
         });
-
-        if (response.ok) {
-          const data = await response.json();
-          const imageUrl = data.secure_url;
-
-          editor.deleteText(range.index, 1);
-          editor.insertEmbed(range.index, 'image', imageUrl);
-          editor.setSelection(range.index + 1);
-        } else {
-          console.error('Image upload failed');
+        const data = await response.json();
+        if (!data || !data?.secure_url) {
+          alert('Failed to upload image');
+          console.log('ERROR on dashboard/EDITOR.jsx ', data);
+          return;
         }
+        const imageUrl = data?.secure_url;
+        quill?.deleteText(range?.index, 1);
+        quill?.setSelection(range?.index + 1, 1);
+        insertToEditor(imageUrl);
       } catch (error) {
         console.error('Image upload failed', error);
       }
     };
-  };
+  }, [insertToEditor, quill]);
 
-  const handleEditorChange = (value: any) => {
-    setContent(value);
-  };
-
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ align: [] }],
-          ['blockquote', 'code-block'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          [{ script: 'sub' }, { script: 'super' }],
-          [{ indent: '-1' }, { indent: '+1' }],
-          [{ direction: 'rtl' }],
-          [{ color: [] }, { background: [] }],
-          ['link', 'image', 'video'],
-          ['clean'],
-        ],
-        handlers: {
-          image: imageHandler,
-        },
-      },
-      syntax: {
-        highlight: (text) => hljs.highlightAuto(text).value,
-      },
-    }),
-    [],
-  );
+  useEffect(() => {
+    if (quill) {
+      quill.getModule('toolbar').addHandler('image', selectLocalImage);
+      quill.on('text-change', (delta, oldDelta, source) => {
+        console.log(quill.root.innerHTML);
+      });
+    }
+  }, [quill, quillRef, selectLocalImage]);
 
   return (
-    <div className='space-y-14'>
-      <ReactQuill
-        placeholder='Hello world....'
-        className='bg-white h-80'
-        ref={quillRef}
-        value={content}
-        onChange={handleEditorChange}
-        modules={modules}
-      />
+    <div className='space-y-8 editorImg'>
+      <div className='h-80 '>
+        <div ref={quillRef} />
+      </div>
+
       <Category
         categories={categories}
         checkedCategories={checkedCategories}
         setCheckedCategories={setCheckedCategories}
       />
+
+      <Button className='flex space-x-3' onClick={handleSavePost}>
+        Save post {isLoading ? <Spinner /> : null}
+      </Button>
     </div>
   );
 };
