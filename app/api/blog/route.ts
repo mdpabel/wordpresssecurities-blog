@@ -85,11 +85,16 @@ export const POST = async (req: NextRequest) => {
     const newBlog = await prisma.post.create({
       data: {
         coverImage: coverImage.secure_url || body.coverImg,
-        content: sanitizeHtml(body.content, {
-          allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
-          allowedAttributes: { img: ['src'] },
-          allowedSchemes: ['data', 'http', 'https'],
-        }),
+        content:
+          body.content ||
+          sanitizeHtml(body.content, {
+            allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+            allowedAttributes: {
+              ...sanitizeHtml.defaults.allowedAttributes,
+              img: ['src'],
+            },
+            allowedSchemes: ['data', 'http', 'https'],
+          }),
         title: sanitizeHtml(body.title),
         metaDescription: sanitizeHtml(body.metas.description),
         metaKeywords: sanitizeHtml(body.metas.keywords),
