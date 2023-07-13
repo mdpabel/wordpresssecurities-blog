@@ -2,8 +2,6 @@
 'use client';
 import React, { useState, useMemo, useRef } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
-import { ImageActions } from '@xeger/quill-image-actions';
-import { ImageFormats } from '@xeger/quill-image-formats';
 import hljs from 'highlight.js';
 import 'react-quill/dist/quill.snow.css';
 // import 'highlight.js/styles/darcula.css';
@@ -14,9 +12,6 @@ import SEO from './SEO';
 import CoverImg from './CoverImg';
 import Spinner from '@/components/common/Spinner';
 import Category from './Category';
-
-Quill.register('modules/imageActions', ImageActions);
-Quill.register('modules/imageFormats', ImageFormats);
 
 interface IEditor {
   setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
@@ -140,8 +135,6 @@ const Editor = ({
 
   const modules = useMemo(
     () => ({
-      imageActions: {},
-      imageFormats: {},
       toolbar: {
         container: [
           [{ header: [1, 2, 3, 4, 5, 6, false] }],

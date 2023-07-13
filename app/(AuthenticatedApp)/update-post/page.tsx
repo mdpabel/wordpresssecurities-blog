@@ -1,10 +1,10 @@
 'use client';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
-// const Editor = dynamic(() => import('@/components/dashboard/Editor-old'), {
-//   ssr: false,
-// });
-import Editor from '@/components/dashboard/Editor';
+const Editor = dynamic(() => import('@/components/dashboard/Editor'), {
+  ssr: false,
+});
+// import Editor from '@/components/dashboard/Editor-old';
 import { client } from '@/utils/client';
 import { useAsync } from '@/hooks/useAsync';
 import ComponentWrapper from '@/components/common/ComponentWrapper';
