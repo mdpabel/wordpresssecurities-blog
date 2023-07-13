@@ -99,7 +99,7 @@ const NewUser = () => {
   return (
     <ComponentWrapper className='pt-10 space-y-8 min-h-[80vh]'>
       <h1 className='text-2xl text-center'>New User</h1>
-      <div className='flex pt-8 flex-col items-center  md:flex-row'>
+      <div className='flex pt-8 flex-col items-center justify-center md:min-h-[60vh]  md:flex-row'>
         <div className='flex flex-col items-center w-full md:w-1/2 '>
           <ImageUpload image={image} handleImage={handleImage} />
           <LinkComponent
