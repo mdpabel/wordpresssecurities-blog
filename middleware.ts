@@ -1,7 +1,4 @@
 import { authMiddleware } from '@clerk/nextjs/server';
-import { redirectToSignIn } from '@clerk/nextjs';
-import { NextResponse } from 'next/server';
-
 export default authMiddleware({
   publicRoutes: [
     '/',
@@ -16,18 +13,6 @@ export default authMiddleware({
     '/api/views/:path*',
     '/coupons',
   ],
-  afterAuth(auth, req, evt) {
-    // const apiUrl = process.env.SITE_URL + 'api/profile';
-    // fetch(apiUrl)
-    //   .then((response) => response.json())
-    //   .then((json) => console.log(json));
-
-    const apiUrl = process.env.SITE_URL + 'api/views';
-
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((json) => console.log(json));
-  },
 });
 
 export const config = {
