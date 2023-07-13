@@ -97,53 +97,58 @@ const NewUser = () => {
   };
 
   return (
-    <ComponentWrapper className='flex min-h-[80vh] flex-col items-center pt-10 md:flex-row'>
-      <div className='flex flex-col items-center w-full md:w-1/2 '>
-        <ImageUpload image={image} handleImage={handleImage} />
-        <LinkComponent
-          links={links}
-          addNewLink={addNewLink}
-          handleLinkChange={handleLinkChange}
-        />
-      </div>
-      <div className='w-full md:w-1/2'>
-        <InputWrapper>
-          <Input
-            readOnly
-            placeholder=''
-            id='fullName'
-            value={user.user?.firstName ?? '' + ' ' + user.user?.lastName ?? ''}
+    <ComponentWrapper className='pt-10 space-y-8 min-h-[80vh]'>
+      <h1 className='text-2xl text-center'>New User</h1>
+      <div className='flex pt-8 flex-col items-center  md:flex-row'>
+        <div className='flex flex-col items-center w-full md:w-1/2 '>
+          <ImageUpload image={image} handleImage={handleImage} />
+          <LinkComponent
+            links={links}
+            addNewLink={addNewLink}
+            handleLinkChange={handleLinkChange}
           />
-        </InputWrapper>
+        </div>
+        <div className='w-full md:w-1/2'>
+          <InputWrapper>
+            <Input
+              readOnly
+              placeholder=''
+              id='fullName'
+              value={
+                user.user?.firstName ?? '' + ' ' + user.user?.lastName ?? ''
+              }
+            />
+          </InputWrapper>
 
-        <InputWrapper>
-          <Input
-            readOnly
-            id='email'
-            value={user?.user?.emailAddresses[0]?.emailAddress ?? ''}
-          />
-        </InputWrapper>
+          <InputWrapper>
+            <Input
+              readOnly
+              id='email'
+              value={user?.user?.emailAddresses[0]?.emailAddress ?? ''}
+            />
+          </InputWrapper>
 
-        <InputWrapper>
-          <Input
-            id='story'
-            onChange={(e) => setStory(e.target.value)}
-            value={story}
-            placeholder='WordPress developer'
-          />
-        </InputWrapper>
+          <InputWrapper>
+            <Input
+              id='story'
+              onChange={(e) => setStory(e.target.value)}
+              value={story}
+              placeholder='WordPress developer'
+            />
+          </InputWrapper>
 
-        <InputWrapper>
-          <TextArea
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            id='description'
-            placeholder="I'm..."
-          />
-        </InputWrapper>
-        <Button onClick={saveProfile} className='mt-8 flex space-x-3'>
-          Save profile {isLoading ? <Spinner /> : ''}
-        </Button>
+          <InputWrapper>
+            <TextArea
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+              id='description'
+              placeholder="I'm..."
+            />
+          </InputWrapper>
+          <Button onClick={saveProfile} className='mt-8 flex space-x-3'>
+            Save profile {isLoading ? <Spinner /> : ''}
+          </Button>
+        </div>
       </div>
     </ComponentWrapper>
   );
