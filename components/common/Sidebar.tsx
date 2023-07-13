@@ -66,6 +66,8 @@ const SidebarItem = ({
   index,
   label,
   link,
+  setToggleSidebar,
+  toggleSidebar,
 }: SidebarItemType) => {
   return (
     <div className={'pt-4'}>
@@ -74,6 +76,7 @@ const SidebarItem = ({
         className='flex justify-between w-full pb-3 border-b-2 border-gray-200 cursor-pointer'
       >
         <Link
+          onClick={() => setToggleSidebar && setToggleSidebar(!toggleSidebar)}
           prefetch
           href={link}
           className='text-sm leading-tight tracking-tight text-gray-800 capitalize select-none xl:text-lg '
@@ -186,6 +189,7 @@ function Sidebar() {
                 return (
                   <SidebarItem
                     link={link}
+                    setToggleSidebar={(val) => setToggleSidebar(val)}
                     list={list}
                     setList={setList}
                     label={label}
