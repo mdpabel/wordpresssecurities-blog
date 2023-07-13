@@ -7,6 +7,7 @@ export const revalidatePaths = (data: any) => {
     revalidatePath('/blog');
     revalidatePath('/hosting-reviews');
     revalidatePath('/coupons');
+    revalidatePath(`/blog/${data?.id}`);
   } catch (error) {
     return NextResponse.json({
       success: true,
