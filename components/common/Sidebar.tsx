@@ -148,7 +148,9 @@ function Sidebar() {
           </div>
 
           <div className='absolute bottom-10'>
-            <Button>Logout</Button>
+            <div className='px-10 py-2 text-white bg-black rounded'>
+              <SignOutButton />
+            </div>
           </div>
         </div>
       </div>

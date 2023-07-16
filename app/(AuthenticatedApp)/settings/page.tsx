@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { useUserByClerkId } from '@/hooks/useUserByClerkId';
 import { Link } from '@prisma/client';
 import withAuth from '@/components/common/withAuth';
+import { client } from '@/utils/client';
 
 const NewUser = () => {
   const { data } = useUserByClerkId();
@@ -30,6 +31,10 @@ const NewUser = () => {
     },
   ]);
 
+  console.log(links);
+
+  const fullName = user.user?.firstName + ' ' + user.user?.lastName ?? '';
+
   useEffect(() => {
     if (!data) return;
     setImage(data?.profilePic);
@@ -43,19 +48,16 @@ const NewUser = () => {
     );
   }, [data]);
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     router.replace('/dashboard');
-  //   }
-  // }, [isSuccess]);
-
   const saveProfile = () => {
     run(
-      createNewUser({
-        bio: description,
-        links,
-        occupation: story,
-        profilePic: image,
+      client('/api/profile', {
+        method: 'PUT',
+        data: {
+          bio: description,
+          occupation: story,
+          profilePic: image,
+          links,
+        },
       }),
     );
   };
@@ -115,12 +117,7 @@ const NewUser = () => {
       </div>
       <div className='w-full md:w-1/2'>
         <InputWrapper>
-          <Input
-            readOnly
-            placeholder=''
-            id='fullName'
-            value={user.user?.firstName ?? '' + ' ' + user.user?.lastName ?? ''}
-          />
+          <Input readOnly placeholder='' id='fullName' value={fullName} />
         </InputWrapper>
 
         <InputWrapper>

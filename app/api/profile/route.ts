@@ -78,3 +78,58 @@ export const POST = async (req: NextRequest) => {
     },
   );
 };
+
+export const PUT = async (req: NextRequest) => {
+  try {
+    const { bio, occupation, profilePic, links } = await req.json();
+    const clerkUser = await currentUser();
+
+    const user = await prisma.user.findFirst({
+      where: {
+        clerkUserId: clerkUser?.id,
+      },
+    });
+
+    const { secure_url } = await cloudinary.v2.uploader.upload(profilePic, {
+      overwrite: true,
+      invalidate: true,
+      width: 450,
+      height: 250,
+      crop: 'fill',
+    });
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: user?.id,
+      },
+      data: {
+        bio,
+        occupation,
+        profilePic: secure_url || profilePic,
+      },
+    });
+
+    const updatedLinks = await prisma.link.updateMany({
+      where: {
+        userId: user?.id,
+      },
+      data: {
+        type: 'newType',
+        url: 'newURL',
+      },
+    });
+
+    console.log(updatedLinks);
+
+    return NextResponse.json({
+      success: true,
+      message: 'Successfully updated profile',
+    });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({
+      success: false,
+      message: 'Something went wrong during updating profile',
+    });
+  }
+};
