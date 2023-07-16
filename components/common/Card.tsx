@@ -166,12 +166,7 @@ export const HostingCard = ({
       </div>
       <p className='h-1/2'>
         {text.slice(0, 75)}{' '}
-        <Link
-          style={{
-            color: '#FF6200',
-          }}
-          href='/'
-        >
+        <Link className='text-orange-500 border-b border-orange-500' href='/'>
           Learn more...
         </Link>
       </p>
