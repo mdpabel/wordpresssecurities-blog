@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useUserByClerkId } from '@/hooks/useUserByClerkId';
 import { useNewUser } from '@/hooks/useNewUser';
 import withAuth from '@/components/common/withAuth';
+import ServiceCategory from '@/components/dashboard/Service';
 
 interface MetaFormElements extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -31,6 +32,9 @@ const AddNewPost = () => {
   });
   const { data, status, run, isLoading, isSuccess, isError } = useAsync();
   const [checkedCategories, setCheckedCategories] = useState<string[]>([]);
+  const [checkedServiceCategories, setCheckedServiceCategories] = useState<
+    string[]
+  >([]);
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   const [coverImg, setCoverImg] = useState('');
@@ -137,6 +141,7 @@ const AddNewPost = () => {
         metas={metas}
         setMetas={setMetas}
       />
+
       {/* <Editor /> */}
       <ToastContainer
         position='top-right'

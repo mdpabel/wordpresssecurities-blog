@@ -19,7 +19,9 @@ const SEO = ({ metas, setMetas }: ISeo) => {
   return (
     <div className='w-full p-8 mx-auto space-y-4  border rounded md:w-1/2'>
       <div className='flex flex-col space-y-3'>
-        <label htmlFor='title'>Meta Title</label>
+        <label htmlFor='title'>
+          Meta Title <sup className='text-xs'>Optional</sup>
+        </label>
         <input
           onChange={(e) =>
             setMetas({
@@ -36,7 +38,9 @@ const SEO = ({ metas, setMetas }: ISeo) => {
       </div>
 
       <div className='flex flex-col space-y-3'>
-        <label htmlFor='Description'>Meta Description</label>
+        <label htmlFor='Description'>
+          Meta Description <sup className='text-xs'>Optional</sup>
+        </label>
         <textarea
           value={metas.description}
           onChange={(e) =>
@@ -52,7 +56,9 @@ const SEO = ({ metas, setMetas }: ISeo) => {
       </div>
 
       <div className='flex flex-col space-y-3'>
-        <label htmlFor='Keywords'>Meta Keywords</label>
+        <label htmlFor='Keywords'>
+          Meta Keywords <sup className='text-xs'>Optional</sup>
+        </label>
         <input
           value={metas.keywords}
           onChange={(e) =>

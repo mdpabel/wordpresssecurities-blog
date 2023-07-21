@@ -13,10 +13,13 @@ import CoverImg from './CoverImg';
 import Spinner from '@/components/common/Spinner';
 import BlotFormatter from 'quill-blot-formatter/dist/BlotFormatter';
 import Category from './Category';
+import ServiceCategory from './Service';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
 interface IEditor {
+  checkedServiceCategories: string[];
+  setCheckedServiceCategories: React.Dispatch<React.SetStateAction<string[]>>;
   checkedCategories: string[];
   setCheckedCategories: React.Dispatch<React.SetStateAction<string[]>>;
   handleSavePost: () => void;
@@ -62,10 +65,14 @@ const categories = [
   },
 ];
 
+const serviceCategories = [];
+
 const Editor = ({
   checkedCategories,
   setCheckedCategories,
   handleSavePost,
+  checkedServiceCategories,
+  setCheckedServiceCategories,
   setContent,
   content,
   coverImg,
@@ -173,11 +180,20 @@ const Editor = ({
         modules={modules}
       />
 
-      <Category
-        categories={categories}
-        checkedCategories={checkedCategories}
-        setCheckedCategories={setCheckedCategories}
-      />
+      <div>
+        <Category
+          categories={categories}
+          checkedCategories={checkedCategories}
+          setCheckedCategories={setCheckedCategories}
+        />
+
+        {/* <ServiceCategory
+          categories={serviceCategories}
+          checkedCategories={checkedServiceCategories}
+          setCheckedCategories={setCheckedServiceCategories}
+        /> */}
+      </div>
+
       <div className='flex flex-col space-x-8 space-y-8 md:justify-between md:flex-row md:items-center'>
         <SEO metas={metas} setMetas={setMetas} />
         <CoverImg setCoverImg={setCoverImg} coverImg={coverImg} />

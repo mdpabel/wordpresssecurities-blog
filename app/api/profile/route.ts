@@ -1,6 +1,7 @@
 import prisma from '@/db/mongo';
 import cloudinary from '@/utils/cloudinaryConfig';
 import { currentUser } from '@clerk/nextjs';
+import { Link } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async () => {
@@ -88,6 +89,9 @@ export const PUT = async (req: NextRequest) => {
       where: {
         clerkUserId: clerkUser?.id,
       },
+      include: {
+        links: true,
+      },
     });
 
     const { secure_url } = await cloudinary.v2.uploader.upload(profilePic, {
@@ -109,17 +113,19 @@ export const PUT = async (req: NextRequest) => {
       },
     });
 
-    const updatedLinks = await prisma.link.updateMany({
+    await prisma.link.deleteMany({
       where: {
-        userId: user?.id,
-      },
-      data: {
-        type: 'newType',
-        url: 'newURL',
+        userId: updatedUser.id,
       },
     });
 
-    console.log(updatedLinks);
+    const linksRes = await prisma.link.createMany({
+      data: links.map((li: any) => ({
+        type: li.type,
+        url: li.link,
+        userId: updatedUser?.id,
+      })),
+    });
 
     return NextResponse.json({
       success: true,
