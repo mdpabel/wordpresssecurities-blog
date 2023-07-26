@@ -19,6 +19,14 @@ const Footer = () => {
             </Link>
           </li>
           <li>
+            <Link
+              href='/editorial-team'
+              className='mr-4 hover:underline md:mr-6 '
+            >
+              Editorial Team
+            </Link>
+          </li>
+          <li>
             <Link href='/' className='mr-4 hover:underline md:mr-6'>
               Privacy Policy
             </Link>

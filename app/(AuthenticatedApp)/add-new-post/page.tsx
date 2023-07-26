@@ -140,6 +140,8 @@ const AddNewPost = () => {
         setCoverImg={setCoverImg}
         metas={metas}
         setMetas={setMetas}
+        checkedServiceCategories={checkedServiceCategories}
+        setCheckedServiceCategories={setCheckedServiceCategories}
       />
 
       {/* <Editor /> */}
